@@ -10,7 +10,7 @@ import UIKit
 
 class GreetingViewController: UIViewController {
 
-    // MARK: - UIOutlets
+    // MARK: - UI Outlets
     @IBOutlet weak var yepButton: UIButton!
     
     // MARK: - ViewController Lifecycle

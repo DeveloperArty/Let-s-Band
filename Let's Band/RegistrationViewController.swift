@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegistrationViewController.swift
 //  Let's Band
 //
 //  Created by Artem Pavlov on 21.12.16.
@@ -8,15 +8,16 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class RegistrationViewController: UIViewController {
 
-    // MARK: - ViewController Lifecycle 
+    // MARK: ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    // MARK: - UI Events
+    //MARK: - UI Events
     @IBAction func backgroundTap(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
+    
 }
