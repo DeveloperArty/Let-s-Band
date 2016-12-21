@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  GreetingViewController.swift
 //  Let's Band
 //
 //  Created by Artem Pavlov on 21.12.16.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class GreetingViewController: UIViewController {
 
-    // MARK: - UI ViewController Lifecycle 
+    // MARK: - UIOutlets
+    @IBOutlet weak var yepButton: UIButton!
+    
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
 }
