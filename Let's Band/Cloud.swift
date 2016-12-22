@@ -15,16 +15,14 @@ class Cloud {
     let container: CKContainer
     let publicDB: CKDatabase
     // Log In 
-    var userNicknameFound: Bool
-    var userPasswordFound: Bool
+    var userNicknameFound = false
+    var userPasswordFound = false
     
     
     // MARK: - Initializers
     init() {
         container = CKContainer.default()
         publicDB = container.publicCloudDatabase
-        userNicknameFound = false
-        userPasswordFound = false
     }
     
     

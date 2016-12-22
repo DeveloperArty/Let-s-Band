@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     
     //MARK: - Properties
     let cloud = Cloud()
+    var logInIsSucsessfull = false 
     
     
     // MARK: - ViewController Lifecycle 
@@ -39,6 +40,7 @@ class LoginViewController: UIViewController {
             return
         }
         cloud.logIn(userNickname: nickname, userPassword: password)
+        self.performSegue(withIdentifier: "SuccessfullLogIn", sender: self)
     }
     
     
