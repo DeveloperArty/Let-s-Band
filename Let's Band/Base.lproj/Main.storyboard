@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="height" constant="250" id="4YA-dz-ts8"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="Type in your nickname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-Zh-kKS">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="admin" borderStyle="roundedRect" placeholder="Type in your nickname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-Zh-kKS">
                                 <rect key="frame" x="19" y="364" width="337" height="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -47,7 +47,7 @@
                                     <action selector="logInButtonPressed:" destination="bZj-hE-10e" eventType="touchUpInside" id="7XO-wj-Rth"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a" borderStyle="roundedRect" placeholder="Type in your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4AQ-aW-bZB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" placeholder="Type in your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4AQ-aW-bZB">
                                 <rect key="frame" x="19" y="414" width="337" height="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
