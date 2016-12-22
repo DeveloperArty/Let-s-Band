@@ -15,12 +15,16 @@ class Cloud {
     let container: CKContainer
     let publicDB: CKDatabase
     let privateDB: CKDatabase
+    // Log In 
+    var noUserWithThisNickname: Bool
+    
     
     // MARK: - Initializers
     init() {
         container = CKContainer.default()
         publicDB = container.publicCloudDatabase
         privateDB = container.privateCloudDatabase
+        noUserWithThisNickname = true
     }
     
     // MARK: - Cloud Methods
@@ -51,6 +55,31 @@ class Cloud {
                 print("an error occured while saving private data; error: \(error?.localizedDescription)")
             }
         })
+    }
+    
+    func logIn(userNickname: String, userPassword: String) {
+
+        // searching for user's data in the cloud
+        let publicPredicate = NSPredicate(format: "Nickname = %@", userNickname)
+        let publicDBQuery = CKQuery(recordType: "publicUsersData", predicate: publicPredicate)
+            publicDB.perform(publicDBQuery, inZoneWith: nil, completionHandler: { recordFound, error in
+                 if error != nil {
+                    print("an error occured while performing a nickname query")
+                 } else {
+                    guard recordFound?.isEmpty == false else {
+                        print("no users with requested nickname found")
+                        return
+                    }
+                    print("user with requested nickname found, \(recordFound)")
+                    self.noUserWithThisNickname = false
+                }
+            })
+        
+//        let privatePredicate = NSPredicate(value: true)
+//        let privateDBQuery = CKQuery(recordType: "privateUsersData", predicate: privatePredicate)
+//        privateDB.perform(privateDBQuery, inZoneWith: nil, completionHandler: { recordFound, error in
+//            
+//        })
     }
     
 }

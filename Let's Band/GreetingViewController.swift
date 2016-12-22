@@ -10,12 +10,15 @@ import UIKit
 
 class GreetingViewController: UIViewController {
 
+    
     // MARK: - UI Outlets
     @IBOutlet weak var yepButton: UIButton!
+    
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     
 }

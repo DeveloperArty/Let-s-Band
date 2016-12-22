@@ -47,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		840395311E0C2FD100F1832E /* File Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84F218641E0B0BDD005A6A83 /* Cloud.swift */,
+			);
+			name = "File Classes";
+			sourceTree = "<group>";
+		};
 		84F218301E0A9671005A6A83 = {
 			isa = PBXGroup;
 			children = (
@@ -67,11 +75,10 @@
 		84F2183B1E0A9671005A6A83 /* Let's Band */ = {
 			isa = PBXGroup;
 			children = (
-				84F2183C1E0A9671005A6A83 /* AppDelegate.swift */,
-				84F218641E0B0BDD005A6A83 /* Cloud.swift */,
 				84F218481E0A9671005A6A83 /* LaunchScreen.storyboard */,
 				84F218401E0A9671005A6A83 /* Main.storyboard */,
 				84F218611E0ACA56005A6A83 /* View Controllers */,
+				840395311E0C2FD100F1832E /* File Classes */,
 				84F2185E1E0AC836005A6A83 /* Supporting Files */,
 			);
 			path = "Let's Band";
@@ -88,6 +95,7 @@
 		84F2185E1E0AC836005A6A83 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84F2183C1E0A9671005A6A83 /* AppDelegate.swift */,
 				84F218511E0A96A1005A6A83 /* Let's Band.entitlements */,
 				84F218461E0A9671005A6A83 /* Assets.xcassets */,
 				84F2184B1E0A9671005A6A83 /* Info.plist */,
