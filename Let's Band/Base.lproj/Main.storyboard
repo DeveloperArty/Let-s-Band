@@ -114,7 +114,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="100.29985007496252"/>
+            <point key="canvasLocation" x="-1375" y="99"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Jrz-N7-zVF">
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j8U-do-MhG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479" y="1069"/>
+            <point key="canvasLocation" x="-937" y="1050"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="krw-my-IXm">
@@ -427,6 +427,7 @@
                         <outlet property="passwordConfirmation" destination="nY1-6u-TIU" id="3ot-Fw-dOO"/>
                         <outlet property="passwordField" destination="wgw-XG-otm" id="9WT-M6-ZhN"/>
                         <outlet property="surnameField" destination="h6r-Uq-GNE" id="URZ-OE-Wpn"/>
+                        <segue destination="gMY-S9-4vg" kind="show" identifier="SuccessfullRegistration" id="ACD-VB-81h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANJ-3y-GUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -436,7 +437,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1610" y="1069"/>
+            <point key="canvasLocation" x="-25" y="1050"/>
         </scene>
         <!--Home-->
         <scene sceneID="KpL-bT-QCz">
@@ -463,6 +464,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="gMY-S9-4vg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="1pC-zD-2jo">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -474,7 +476,10 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cce-xl-ahk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="100"/>
+            <point key="canvasLocation" x="738" y="99"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Nye-a6-Qko"/>
+    </inferredMetricsTieBreakers>
 </document>

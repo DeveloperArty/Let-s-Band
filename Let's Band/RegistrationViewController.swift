@@ -53,7 +53,7 @@ class RegistrationViewController: UIViewController {
             return
         }
         let dateOfBirth = datePicker.date
-        cloud.registerNewUser(name: name, surname: surname, dateOfBirth: dateOfBirth, nickname: nickname, password: password, mail: mail)
+        cloud.registerNewUser(name: name, surname: surname, dateOfBirth: dateOfBirth, nickname: nickname, password: password, mail: mail,senderViewController: self)
     }
     
     

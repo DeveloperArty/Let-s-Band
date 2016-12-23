@@ -39,8 +39,7 @@ class LoginViewController: UIViewController {
         guard let password = passwordField.text else {
             return
         }
-        cloud.logIn(userNickname: nickname, userPassword: password)
-        self.performSegue(withIdentifier: "SuccessfullLogIn", sender: self)
+        cloud.logIn(userNickname: nickname, userPassword: password, senderViewController: self)
     }
     
     

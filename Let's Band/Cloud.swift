@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import UIKit
 
 class Cloud {
     
@@ -27,7 +28,7 @@ class Cloud {
     
     
     // MARK: - Cloud Methods
-    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String) {
+    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, senderViewController: UIViewController) {
         
         // saving public data
         let publicDataRecord = CKRecord(recordType: "publicUserData")
@@ -41,6 +42,7 @@ class Cloud {
         publicDB.save(publicDataRecord, completionHandler: { record , error in
             if error == nil {
                 print("public data saved correctly")
+                senderViewController.performSegue(withIdentifier: "SuccessfullRegistration", sender: senderViewController)
             } else {
                 print("an error occured while saving public data; error: \(error?.localizedDescription)")
             }
@@ -48,7 +50,7 @@ class Cloud {
         
     }
     
-    func logIn(userNickname: String, userPassword: String) {
+    func logIn(userNickname: String, userPassword: String, senderViewController: UIViewController) {
 
         // searching for user's data in the cloud
         
@@ -64,23 +66,29 @@ class Cloud {
                     return
                 }
                 print("user with requested nickname found")
-                self.userNicknameFound = true
-            }
-        })
-        
-        // searching for a password
-        let passwordPredicate = NSPredicate(format: "Password = %@", userPassword)
-        let passwordQuery = CKQuery(recordType: "publicUserData", predicate: passwordPredicate)
-        publicDB.perform(passwordQuery, inZoneWith: nil, completionHandler: { recordsFound, error in
-            if error != nil {
-                print("an error occured while performing a password query")
-            } else {
-                guard recordsFound?.isEmpty == false else {
-                    print("no matching passwords found")
+                let record = recordsFound?.first
+                guard let recordCreatorID = record?.creatorUserRecordID else {
+                    print("error: record creator not found")
                     return
                 }
-                print("requested password found")
-                self.userPasswordFound = true 
+                print("record creator found, user id: \(recordCreatorID)")
+                
+                // password check for the specific user
+                let passwordPredicate = NSPredicate(format: "Password = %@ && creatorUserRecordID = %@", userPassword, recordCreatorID)
+                let passwordQuery = CKQuery(recordType: "publicUserData", predicate: passwordPredicate)
+                self.publicDB.perform(passwordQuery, inZoneWith: nil, completionHandler: { recordsFound, error in
+                    if error != nil {
+                        print("an error occured while performing a password query, error: \(error?.localizedDescription)")
+                    } else {
+                        guard recordsFound?.isEmpty == false else {
+                            print("no matching passwords found")
+                            return
+                        }
+                        print("requested password found, acccess enabled")
+                        senderViewController.performSegue(withIdentifier: "SuccessfullLogIn", sender: senderViewController)
+                    }
+                })
+
             }
         })
         
