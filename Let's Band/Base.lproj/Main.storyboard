@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="-1375" y="99"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="Jrz-N7-zVF">
             <objects>
-                <viewController id="QYF-w5-BaS" sceneMemberID="viewController">
+                <viewController id="QYF-w5-BaS" customClass="ProfileViewController" customModule="Let_s_Band" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jhf-VT-q7H"/>
                         <viewControllerLayoutGuide type="bottom" id="xO6-a0-CLb"/>
@@ -129,13 +129,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="gtM-C3-l3k"/>
+                    <tabBarItem key="tabBarItem" title="" image="Profile" id="gtM-C3-l3k"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0s-QZ-M1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2532" y="-643"/>
         </scene>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="Oy6-yT-c2P">
             <objects>
                 <viewController id="28a-DJ-xLW" customClass="MapViewController" customModule="Let_s_Band" customModuleProvider="target" sceneMemberID="viewController">
@@ -148,7 +148,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="hBe-8w-NCr"/>
+                    <tabBarItem key="tabBarItem" title="" image="Map" id="hBe-8w-NCr">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g46-Y7-mmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -439,10 +441,10 @@
             </objects>
             <point key="canvasLocation" x="-25" y="1050"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="KpL-bT-QCz">
             <objects>
-                <viewController id="FD6-1v-Cky" sceneMemberID="viewController">
+                <viewController id="FD6-1v-Cky" customClass="HomeViewController" customModule="Let_s_Band" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FOY-Bw-5km"/>
                         <viewControllerLayoutGuide type="bottom" id="ZZD-QR-Rr8"/>
@@ -452,7 +454,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="Ywd-ws-G2g"/>
+                    <tabBarItem key="tabBarItem" title="" image="Home" id="Ywd-ws-G2g"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5N-dQ-W8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -469,9 +471,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="FD6-1v-Cky" kind="relationship" relationship="viewControllers" id="61i-5w-r6H"/>
                         <segue destination="28a-DJ-xLW" kind="relationship" relationship="viewControllers" id="V9P-ek-o4p"/>
                         <segue destination="QYF-w5-BaS" kind="relationship" relationship="viewControllers" id="Hap-mM-cRU"/>
-                        <segue destination="FD6-1v-Cky" kind="relationship" relationship="viewControllers" id="61i-5w-r6H"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cce-xl-ahk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -479,6 +481,11 @@
             <point key="canvasLocation" x="738" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home" width="25" height="25"/>
+        <image name="Map" width="25" height="25"/>
+        <image name="Profile" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Nye-a6-Qko"/>
     </inferredMetricsTieBreakers>
