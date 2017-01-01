@@ -23,6 +23,7 @@ class RegistrationViewController: UIViewController {
     
     // MARK: - Class Propreties
     let cloud = Cloud()
+    var nicknameToSendFarther = ""
     
     
     // MARK: ViewController Lifecycle
@@ -30,6 +31,13 @@ class RegistrationViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? LocationSetViewController else {
+            return
+        }
+        vc.receivedNickname = nicknameToSendFarther
+    }
+    
     
     // MARK: - UI Events
     @IBAction func backgroundTap(_ sender: UITapGestureRecognizer) {
@@ -46,6 +54,7 @@ class RegistrationViewController: UIViewController {
         guard let nickname = nicknameField.text else {
             return
         }
+        self.nicknameToSendFarther = nickname
         guard let password = passwordField.text else {
             return
         }
@@ -53,7 +62,10 @@ class RegistrationViewController: UIViewController {
             return
         }
         let dateOfBirth = datePicker.date
+        
         cloud.registerNewUser(name: name, surname: surname, dateOfBirth: dateOfBirth, nickname: nickname, password: password, mail: mail,senderViewController: self)
+        
+        
     }
     
     

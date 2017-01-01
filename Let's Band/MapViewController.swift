@@ -36,13 +36,12 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 30
-        locationManager.requestWhenInUseAuthorization()
     }
     
 }
 
 
-// MARK: - Location Manager Delegate Protocol Conformance
+// MARK: - LocationManager Delegate Protocol Conformance
 extension MapViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

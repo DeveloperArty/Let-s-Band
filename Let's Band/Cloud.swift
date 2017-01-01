@@ -42,7 +42,7 @@ class Cloud {
         publicDB.save(publicDataRecord, completionHandler: { record , error in
             if error == nil {
                 print("public data saved correctly")
-                senderViewController.performSegue(withIdentifier: "SuccessfullRegistration", sender: senderViewController)
+                senderViewController.performSegue(withIdentifier: "ContinueRegistration", sender: nickname)
             } else {
                 print("an error occured while saving public data; error: \(error?.localizedDescription)")
             }
@@ -79,6 +79,7 @@ class Cloud {
                 self.publicDB.perform(passwordQuery, inZoneWith: nil, completionHandler: { recordsFound, error in
                     if error != nil {
                         print("an error occured while performing a password query, error: \(error?.localizedDescription)")
+                        return
                     } else {
                         guard recordsFound?.isEmpty == false else {
                             print("no matching passwords found")
@@ -93,5 +94,28 @@ class Cloud {
         })
         
     }
+    
+    func addUserCoordinate(nickname: String, location: CLLocation) {
+        
+        //searching for user record
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no users with requested nickname found")
+                    return
+                }
+                let record = records!.first
+                record!["Location"] = location as CKRecordValue?
+            }
+        })
+        
+    }
+    
+    
     
 }
