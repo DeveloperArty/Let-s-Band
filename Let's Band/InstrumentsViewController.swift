@@ -12,7 +12,7 @@ class InstrumentsViewController: UIViewController {
 
     
     // MARK: - Outlets
-    
+    @IBOutlet weak var tableView: UITableView!
     
     
     // MARK: - Properties
@@ -25,6 +25,23 @@ class InstrumentsViewController: UIViewController {
     let intrumets = ["Balalaika", "Drums", "Guitar", "Vocal", "Piano", "Saxophone", "Violin", "Electric Guitar"]
     
     
+    // MARK: - ViewController Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    
+    // MARK: - UI Events
+    @IBAction func letsBandButtonPressed(_ sender: UIButton) {
+        guard let selectedInstsIndexPaths = tableView.indexPathsForSelectedRows else {
+            return
+        }
+        var selectedInsts = [String]()
+        for indexPath in selectedInstsIndexPaths {
+            selectedInsts.append(self.intrumets.sorted()[indexPath.row])
+        }
+        cloud.addUserInstruments(nickname: self.receivedNickname, instruments: selectedInsts, senderViewController: self)
+    }
     
 }
 
@@ -37,12 +54,13 @@ extension InstrumentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "InstrumentCell", for: indexPath)
         let instName = self.intrumets.sorted()[indexPath.row]
         let image = UIImage(named: instName)
         cell.imageView?.image = image
         cell.textLabel?.text = instName
-        return cell 
+        return cell
     }
     
 }
@@ -52,7 +70,7 @@ extension InstrumentsViewController: UITableViewDataSource {
 extension InstrumentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

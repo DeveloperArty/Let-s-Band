@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fqO-WR-Sfq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i7w-ZQ-Ive">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -125,7 +125,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xO6-a0-CLb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0uE-Hn-HA6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -144,11 +144,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ydZ-aI-AMh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hRy-B6-dNx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZxJ-vz-y9a">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="931"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -361,9 +361,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="PFk-ci-hKO"/>
                                         </constraints>
-                                        <state key="normal" title="Let's Band!"/>
+                                        <state key="normal" title="Next"/>
                                         <connections>
-                                            <action selector="letsBandButtonPressed:" destination="i7w-ZQ-Ive" eventType="touchUpInside" id="ABg-pA-o9w"/>
+                                            <action selector="nextButtonPressed:" destination="i7w-ZQ-Ive" eventType="touchUpInside" id="fXG-SW-kmt"/>
                                             <segue destination="vBf-or-ymq" kind="show" identifier="ContinueRegistration" id="eBX-sI-ZVn"/>
                                         </connections>
                                     </button>
@@ -508,7 +508,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ZZD-QR-Rr8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="czK-Ux-aCI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -533,6 +533,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qq0-vD-FBR">
                                 <rect key="frame" x="0.0" y="20" width="375" height="980"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rfT-Sr-9KY">
+                                    <rect key="frame" x="0.0" y="128" width="375" height="51"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <state key="normal" title="Let's Band!"/>
+                                    <state key="highlighted" title="Please Wait"/>
+                                    <connections>
+                                        <action selector="letsBandButtonPressed:" destination="fqO-WR-Sfq" eventType="touchUpInside" id="3Gr-lw-je6"/>
+                                    </connections>
+                                </button>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InstrumentCell" rowHeight="100" id="klp-3a-RDu">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
@@ -557,10 +567,14 @@
                             <constraint firstAttribute="trailing" secondItem="Qq0-vD-FBR" secondAttribute="trailing" id="tbO-TS-4hC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Qq0-vD-FBR" id="uQy-5W-nja"/>
+                        <segue destination="gMY-S9-4vg" kind="show" identifier="RegistrationDoneSuccessfully" id="8Sb-Bx-b2T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZP-8e-oaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="448" y="501"/>
+            <point key="canvasLocation" x="447.19999999999999" y="500.1499250374813"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="LbA-cb-ztI">
@@ -588,4 +602,7 @@
         <image name="Map" width="25" height="25"/>
         <image name="Profile" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="8Sb-Bx-b2T"/>
+    </inferredMetricsTieBreakers>
 </document>

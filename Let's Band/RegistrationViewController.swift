@@ -44,7 +44,7 @@ class RegistrationViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func letsBandButtonPressed(_ sender: UIButton) {
+    @IBAction func nextButtonPressed(_ sender: UIButton) {
         guard let name = nameField.text else {
             return
         }

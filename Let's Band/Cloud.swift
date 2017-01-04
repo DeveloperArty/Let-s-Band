@@ -124,5 +124,37 @@ class Cloud {
         })
     }
     
+    func addUserInstruments(nickname: String, instruments: [String], senderViewController: InstrumentsViewController) {
+        
+        print("\(instruments)")
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                
+                record["Instrumets"] = instruments as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("user instrumets added successfully")
+                        senderViewController.performSegue(withIdentifier: "RegistrationDoneSuccessfully", sender: nil)
+                    } else {
+                        print("an error occured while saving user instrumets")
+                    }
+                })
+            }
+        })
+    }
+    
     
 }
