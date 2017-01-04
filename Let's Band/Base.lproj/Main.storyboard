@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -468,15 +467,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AXG-sO-NCW">
-                                <rect key="frame" x="35" y="930" width="304" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xqy-Hx-NcT"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sfv-JZ-x5s">
-                                <rect key="frame" x="-1" y="20" width="376" height="890"/>
+                                <rect key="frame" x="-1" y="20" width="376" height="980"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="rcm-MB-o4E" appends="YES" id="A9g-wP-sml"/>
@@ -487,11 +479,8 @@
                         <constraints>
                             <constraint firstItem="sfv-JZ-x5s" firstAttribute="centerX" secondItem="gaL-6f-3PQ" secondAttribute="centerX" id="1T4-if-4tT"/>
                             <constraint firstAttribute="trailing" secondItem="sfv-JZ-x5s" secondAttribute="trailing" id="7um-ic-PxZ"/>
-                            <constraint firstItem="FDg-PE-bGb" firstAttribute="top" secondItem="AXG-sO-NCW" secondAttribute="bottom" constant="20" id="QH6-eZ-Zdd"/>
-                            <constraint firstItem="AXG-sO-NCW" firstAttribute="top" secondItem="sfv-JZ-x5s" secondAttribute="bottom" constant="20" id="ZFf-LQ-s9U"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AXG-sO-NCW" secondAttribute="trailing" constant="20" id="fuU-1b-O4s"/>
+                            <constraint firstItem="FDg-PE-bGb" firstAttribute="top" secondItem="sfv-JZ-x5s" secondAttribute="bottom" id="DF8-tE-8ft"/>
                             <constraint firstItem="sfv-JZ-x5s" firstAttribute="top" secondItem="yfv-Hp-XT7" secondAttribute="bottom" id="pc2-dd-29s"/>
-                            <constraint firstItem="AXG-sO-NCW" firstAttribute="centerX" secondItem="gaL-6f-3PQ" secondAttribute="centerX" id="zL1-Mc-veN"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -21,7 +21,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var mailField: UITextField!
     
     
-    // MARK: - Class Propreties
+    // MARK: - Propreties
     let cloud = Cloud()
     var nicknameToSendFarther = ""
     

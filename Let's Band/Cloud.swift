@@ -32,13 +32,13 @@ class Cloud {
         
         // saving public data
         let publicDataRecord = CKRecord(recordType: "publicUserData")
-        publicDataRecord["Name"] = name as CKRecordValue?
-        publicDataRecord["Surname"] = surname as CKRecordValue?
-        publicDataRecord["DateOfBirth"] = dateOfBirth as CKRecordValue?
-        publicDataRecord["Nickname"] = nickname as CKRecordValue?
-        publicDataRecord["Password"] = password as CKRecordValue?
-        publicDataRecord["Mail"] = mail as CKRecordValue?
-
+        publicDataRecord["Name"] = name as CKRecordValue
+        publicDataRecord["Surname"] = surname as CKRecordValue
+        publicDataRecord["DateOfBirth"] = dateOfBirth as CKRecordValue
+        publicDataRecord["Nickname"] = nickname as CKRecordValue
+        publicDataRecord["Password"] = password as CKRecordValue
+        publicDataRecord["Mail"] = mail as CKRecordValue
+        
         publicDB.save(publicDataRecord, completionHandler: { record , error in
             if error == nil {
                 print("public data saved correctly")
@@ -86,7 +86,7 @@ class Cloud {
                             return
                         }
                         print("requested password found, acccess enabled")
-                        senderViewController.performSegue(withIdentifier: "SuccessfullLogIn", sender: senderViewController)
+                        senderViewController.performSegue(withIdentifier: "SuccessfullLogIn", sender: nil)
                     }
                 })
 
@@ -95,27 +95,33 @@ class Cloud {
         
     }
     
-    func addUserCoordinate(nickname: String, location: CLLocation) {
+    func addUserCoordinate(nickname: String, location: CLLocation, senderViewController: LocationSetViewController) {
         
-        //searching for user record
         let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
         let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
         publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
             if error != nil {
                 print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
                 return
             } else {
                 guard records?.isEmpty == false else {
-                    print("no users with requested nickname found")
+                    print("no records found")
+                    senderViewController.ignoreMapTap = false
                     return
                 }
-                let record = records!.first
-                record!["Location"] = location as CKRecordValue?
+                guard let record = records?.first else {
+                    return
+                }
+                record["Location"] = location as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("location added correctly")
+                    }
+                })
             }
         })
-        
     }
-    
     
     
 }

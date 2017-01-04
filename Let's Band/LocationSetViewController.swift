@@ -19,30 +19,36 @@ class LocationSetViewController: UIViewController {
     
     // MARK: - Properties
     let cloud = Cloud()
-    
     // map
     var locationManager = CLLocationManager()
     var setMapRegion = true
     var ignoreMapTap = false
-
+    // data to save in the cloud
     var userLocation: CLLocation? {
         willSet {
             print("user coordinate is going to be updated")
-            cloud.addUserCoordinate(nickname: receivedNickname, location: newValue!)
+            cloud.addUserCoordinate(nickname: receivedNickname, location: newValue!, senderViewController: self)
         }
     }
-    
     var receivedNickname = "" {
         willSet {
             print("LocationSetViewController has received user nickname, nickname: \(newValue)")
         }
     }
     
+    
     // MARK: - ViewConroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager = CLLocationManager()
         setUpLocationManager()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? InstrumentsViewController else {
+            return
+        }
+        vc.receivedNickname = self.receivedNickname
     }
     
     
