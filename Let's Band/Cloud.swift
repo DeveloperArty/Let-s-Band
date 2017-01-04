@@ -117,6 +117,7 @@ class Cloud {
                 self.publicDB.save(record, completionHandler: { record, error in
                     if error == nil {
                         print("location added correctly")
+                        senderViewController.performSegue(withIdentifier: "RegistrationAlmostDone", sender: nickname)
                     }
                 })
             }
