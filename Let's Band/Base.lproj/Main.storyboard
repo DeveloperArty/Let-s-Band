@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i7w-ZQ-Ive">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bZj-hE-10e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -114,7 +114,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-594" y="-920"/>
+            <point key="canvasLocation" x="-572" y="-922"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jrz-N7-zVF">
@@ -125,15 +125,31 @@
                         <viewControllerLayoutGuide type="bottom" id="xO6-a0-CLb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0uE-Hn-HA6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjP-xE-lRD">
+                                <rect key="frame" x="305" y="35" width="55" height="30"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="QYF-w5-BaS" eventType="touchUpInside" id="AkC-LM-oWt"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hjP-xE-lRD" firstAttribute="top" secondItem="Jhf-VT-q7H" secondAttribute="bottom" constant="15" id="tJ4-eU-4AL"/>
+                            <constraint firstAttribute="trailing" secondItem="hjP-xE-lRD" secondAttribute="trailing" constant="15" id="uDG-nB-Ipp"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Profile" id="gtM-C3-l3k"/>
+                    <tabBarItem key="tabBarItem" title="" image="Profile" selectedImage="Profile" id="gtM-C3-l3k"/>
+                    <connections>
+                        <segue destination="bZj-hE-10e" kind="show" identifier="LogOut" id="MOE-zO-B4j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q0s-QZ-M1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2532" y="-643"/>
+            <point key="canvasLocation" x="2532" y="-921"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Oy6-yT-c2P">
@@ -144,11 +160,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ydZ-aI-AMh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hRy-B6-dNx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZxJ-vz-y9a">
-                                <rect key="frame" x="0.0" y="20" width="375" height="931"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -159,7 +175,7 @@
                             <constraint firstAttribute="trailing" secondItem="ZxJ-vz-y9a" secondAttribute="trailing" id="yEI-US-Wib"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Map" id="hBe-8w-NCr">
+                    <tabBarItem key="tabBarItem" title="" image="Map" selectedImage="Map" id="hBe-8w-NCr">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
@@ -508,11 +524,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ZZD-QR-Rr8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="czK-Ux-aCI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Home" id="Ywd-ws-G2g"/>
+                    <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="Home" id="Ywd-ws-G2g"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5N-dQ-W8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -540,7 +556,7 @@
                                     <state key="normal" title="Let's Band!"/>
                                     <state key="highlighted" title="Please Wait"/>
                                     <connections>
-                                        <action selector="letsBandButtonPressed:" destination="fqO-WR-Sfq" eventType="touchUpInside" id="3Gr-lw-je6"/>
+                                        <action selector="letsBandButtonPressed:" destination="fqO-WR-Sfq" eventType="touchUpInside" id="iTG-Aa-S1w"/>
                                     </connections>
                                 </button>
                                 <prototypes>
@@ -603,6 +619,6 @@
         <image name="Profile" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Sb-Bx-b2T"/>
+        <segue reference="Nye-a6-Qko"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -28,29 +28,8 @@ class Cloud {
     
     
     // MARK: - Cloud Methods
-    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, senderViewController: UIViewController) {
-        
-        // saving public data
-        let publicDataRecord = CKRecord(recordType: "publicUserData")
-        publicDataRecord["Name"] = name as CKRecordValue
-        publicDataRecord["Surname"] = surname as CKRecordValue
-        publicDataRecord["DateOfBirth"] = dateOfBirth as CKRecordValue
-        publicDataRecord["Nickname"] = nickname as CKRecordValue
-        publicDataRecord["Password"] = password as CKRecordValue
-        publicDataRecord["Mail"] = mail as CKRecordValue
-        
-        publicDB.save(publicDataRecord, completionHandler: { record , error in
-            if error == nil {
-                print("public data saved correctly")
-                senderViewController.performSegue(withIdentifier: "ContinueRegistration", sender: nickname)
-            } else {
-                print("an error occured while saving public data; error: \(error?.localizedDescription)")
-            }
-        })
-        
-    }
     
-    func logIn(userNickname: String, userPassword: String, senderViewController: UIViewController) {
+    func logIn(userNickname: String, userPassword: String, senderViewController: LoginViewController) {
 
         // searching for user's data in the cloud
         
@@ -86,10 +65,33 @@ class Cloud {
                             return
                         }
                         print("requested password found, acccess enabled")
+                        senderViewController.defaults.set(userNickname, forKey: "nickname")
                         senderViewController.performSegue(withIdentifier: "SuccessfullLogIn", sender: nil)
                     }
                 })
 
+            }
+        })
+        
+    }
+    
+    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, senderViewController: UIViewController) {
+        
+        // saving public data
+        let publicDataRecord = CKRecord(recordType: "publicUserData")
+        publicDataRecord["Name"] = name as CKRecordValue
+        publicDataRecord["Surname"] = surname as CKRecordValue
+        publicDataRecord["DateOfBirth"] = dateOfBirth as CKRecordValue
+        publicDataRecord["Nickname"] = nickname as CKRecordValue
+        publicDataRecord["Password"] = password as CKRecordValue
+        publicDataRecord["Mail"] = mail as CKRecordValue
+        
+        publicDB.save(publicDataRecord, completionHandler: { record , error in
+            if error == nil {
+                print("public data saved correctly")
+                senderViewController.performSegue(withIdentifier: "ContinueRegistration", sender: nickname)
+            } else {
+                print("an error occured while saving public data; error: \(error?.localizedDescription)")
             }
         })
         
@@ -147,6 +149,7 @@ class Cloud {
                 self.publicDB.save(record, completionHandler: { record, error in
                     if error == nil {
                         print("user instrumets added successfully")
+                        senderViewController.defaults.set(nickname, forKey: "nickname")
                         senderViewController.performSegue(withIdentifier: "RegistrationDoneSuccessfully", sender: nil)
                     } else {
                         print("an error occured while saving user instrumets")

@@ -9,7 +9,17 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
+    
+    // MARK: - Properties
+    let defaults = UserDefaults()
     
 
+    // MARK: - UI Events
+    @IBAction func logOut(_ sender: UIButton) {
+        defaults.set(nil, forKey: "nickname")
+        self.performSegue(withIdentifier: "LogOut", sender: nil)
+    }
+
+    
 }

@@ -18,14 +18,33 @@ class LoginViewController: UIViewController {
     
     //MARK: - Properties
     let cloud = Cloud()
-    var logInIsSucsessfull = false 
+    var logInIsSucsessfull = false
+    let defaults = UserDefaults()
     
     
     // MARK: - ViewController Lifecycle 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkIfLogedIn()
+    }
 
+    
+    // MARK: - Methods
+    func checkIfLogedIn() {
+        let nickname = defaults.value(forKey: "nickname")
+        if  nickname as? String? == nil {
+            print("log in required")
+            return
+        } else {
+            print("log in not required")
+            self.performSegue(withIdentifier: "SuccessfullLogIn", sender: nil)
+        }
+    }
+    
     
     // MARK: - UI Events
     @IBAction func backgroundTap(_ sender: UITapGestureRecognizer) {

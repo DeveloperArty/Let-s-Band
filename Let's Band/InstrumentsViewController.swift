@@ -17,6 +17,7 @@ class InstrumentsViewController: UIViewController {
     
     // MARK: - Properties
     let cloud = Cloud()
+    let defaults = UserDefaults.standard
     var receivedNickname = "" {
         willSet {
             print("InstrumetsViewController has received user nickname, nickname: \(newValue)")
