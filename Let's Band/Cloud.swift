@@ -159,5 +159,31 @@ class Cloud {
         })
     }
     
+    func loadInstruments(nickname: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                
+                senderViewController.userInsts = record["Instrumets"] as? [String]
+                
+            }
+        })
+
+        
+    }
+    
     
 }

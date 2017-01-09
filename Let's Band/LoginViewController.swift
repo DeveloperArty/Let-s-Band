@@ -36,11 +36,11 @@ class LoginViewController: UIViewController {
     // MARK: - Methods
     func checkIfLogedIn() {
         let nickname = defaults.value(forKey: "nickname")
-        if  nickname as? String? == nil {
-            print("log in required")
+        if  nickname == nil || nickname as? String == "-" {
+            print("log in required, nickname: \(nickname)")
             return
         } else {
-            print("log in not required")
+            print("log in not required, nickname: \(nickname)")
             self.performSegue(withIdentifier: "SuccessfullLogIn", sender: nil)
         }
     }

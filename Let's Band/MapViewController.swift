@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UISplitViewControllerDelegate {
     
     
     // MARK: - Outlets
@@ -36,6 +36,7 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 30
+        locationManager.requestWhenInUseAuthorization()
     }
     
 }
