@@ -184,7 +184,7 @@ class Cloud {
         
     }
     
-    func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation) -> [SomeUserAnnotation]? {
+    func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation, senderViewController: MapViewController) {
         
         let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f", userLocation, distance)
         let userQuery = CKQuery(recordType: "publicUserData", predicate: userPredicate)
@@ -194,30 +194,32 @@ class Cloud {
             if error != nil {
                 print("an error occured while performing a user query, error: \(error?.localizedDescription)")
             } else {
-                guard records?.isEmpty == false else {
+                guard records?.first != nil else {
                     print("no records found")
                     return
                 }
-                var annotationsToShow: [SomeUserAnnotation]?
                 
-                print("\(distance)")
+                print("distance: \(distance)")
+                
+                var annotationsToShow: [SomeUserAnnotation?] = []
                 
                 for record in records! {
+                    print("\(record["Nickname"]!)")
+                    let locationFound = record["Location"] as! CLLocation
+                    let nicknameFound = record["Nickname"] as! String
+                    let annotation = SomeUserAnnotation(coordinate: locationFound.coordinate)
+                    annotation.userName = nicknameFound
                     
-                    print("\(record["Nickname"])")
+                    annotationsToShow.append(annotation)
                     
-                    let location = record["Location"] as! CLLocation
-                    let nickname = record["Nickname"] as! String
-                    let annotation = SomeUserAnnotation(coordinate: location.coordinate)
-                    annotation.userName = nickname
-                    annotationsToShow?.append(annotation)
                 }
                 
-                print("")
-                
+                print("annotations to send farther: \(annotationsToShow.count)")
+                senderViewController.annotationsToShow = annotationsToShow
             }
         })
-        return nil 
+        
+        return
     }
     
     

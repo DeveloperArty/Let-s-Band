@@ -19,9 +19,22 @@ class MapViewController: UIViewController {
     
     
     // MARK: - Properties 
+    // map setup
     var locationManager = CLLocationManager()
     var setMapRegion = true
+    // cloud
     let cloud = Cloud()
+    // map objects
+    var annotationsToShow: [MKAnnotation?] = [] {
+        willSet {
+            guard newValue.isEmpty == false else {
+                print("no annotations to add")
+                return
+            }
+            print("annotationsToShow: \(newValue.count)")
+            mainMap.addAnnotations(newValue as! [MKAnnotation])
+        }
+    }
     
     
     // MARK: - ViewController Lifecycle
@@ -40,19 +53,6 @@ class MapViewController: UIViewController {
         locationManager.distanceFilter = 30
         locationManager.requestWhenInUseAuthorization()
     }
-    
-    
-    @IBAction func buttonPressed(_ sender: UIButton) {
-        
-        guard let distance = distanceField.text else {
-            return
-        }
-        
-        var accs = cloud.findOtherUsersWithDistance(distance: Double(distance)!, userLocation: mainMap.userLocation.location!)
-        
-    }
-    
-    
     
     
     // testing
@@ -112,8 +112,22 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.annotation = annotation
         }
 
-//        annotationView?.image = UIImage(named: "Balalaika")
+        annotationView?.image = UIImage(named: "Balalaika")
         return annotationView
+    }
+    
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        
+        print("mapViewDidFinishRenderingMap")
+        
+        let currentRegion = mapView.region
+        let distanceInMeters = currentRegion.span.latitudeDelta * 111 * 1000
+        let centerScreenLocation = CLLocation(latitude: currentRegion.center.latitude,
+                                              longitude: currentRegion.center.longitude)
+        cloud.findOtherUsersWithDistance(distance: distanceInMeters,
+                                         userLocation: centerScreenLocation,
+                                         senderViewController: self)
+        
     }
     
 }

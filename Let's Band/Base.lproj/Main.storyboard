@@ -211,34 +211,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZxJ-vz-y9a">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="28a-DJ-xLW" id="j1o-2r-QYH"/>
                                 </connections>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="distance " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvm-nV-xVr">
-                                <rect key="frame" x="67" y="42" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVj-Ex-WD3">
-                                <rect key="frame" x="218" y="50" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="28a-DJ-xLW" eventType="touchUpInside" id="PDs-bs-xMz"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ydZ-aI-AMh" firstAttribute="top" secondItem="ZxJ-vz-y9a" secondAttribute="bottom" id="6uQ-wg-Ym2"/>
                             <constraint firstItem="ZxJ-vz-y9a" firstAttribute="leading" secondItem="hRy-B6-dNx" secondAttribute="leading" id="JXH-P9-Dpp"/>
-                            <constraint firstItem="ZxJ-vz-y9a" firstAttribute="top" secondItem="v3A-me-0NX" secondAttribute="bottom" constant="76" id="kdn-pd-zbK"/>
+                            <constraint firstItem="ZxJ-vz-y9a" firstAttribute="top" secondItem="v3A-me-0NX" secondAttribute="bottom" id="kdn-pd-zbK"/>
                             <constraint firstAttribute="trailing" secondItem="ZxJ-vz-y9a" secondAttribute="trailing" id="yEI-US-Wib"/>
                         </constraints>
                         <connections>
@@ -249,7 +234,6 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="distanceField" destination="lvm-nV-xVr" id="sEm-V1-Jzl"/>
                         <outlet property="mainMap" destination="ZxJ-vz-y9a" id="UEr-Um-IAJ"/>
                     </connections>
                 </viewController>
