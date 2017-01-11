@@ -178,11 +178,46 @@ class Cloud {
                 }
                 
                 senderViewController.userInsts = record["Instrumets"] as? [String]
+                return
+            }
+        })
+        
+    }
+    
+    func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation) -> [SomeUserAnnotation]? {
+        
+        let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f", userLocation, distance)
+        let userQuery = CKQuery(recordType: "publicUserData", predicate: userPredicate)
+        
+        publicDB.perform(userQuery, inZoneWith: nil, completionHandler: { records, error in
+            
+            if error != nil {
+                print("an error occured while performing a user query, error: \(error?.localizedDescription)")
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                var annotationsToShow: [SomeUserAnnotation]?
+                
+                print("\(distance)")
+                
+                for record in records! {
+                    
+                    print("\(record["Nickname"])")
+                    
+                    let location = record["Location"] as! CLLocation
+                    let nickname = record["Nickname"] as! String
+                    let annotation = SomeUserAnnotation(coordinate: location.coordinate)
+                    annotation.userName = nickname
+                    annotationsToShow?.append(annotation)
+                }
+                
+                print("")
                 
             }
         })
-
-        
+        return nil 
     }
     
     

@@ -24,6 +24,8 @@
 		84F462411E19700C0025F99B /* InstrumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F462401E19700C0025F99B /* InstrumentsViewController.swift */; };
 		84F462461E1C235E0025F99B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F462441E1C235E0025F99B /* Main.storyboard */; };
 		84F462481E1E4C9F0025F99B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84F462471E1E4C9F0025F99B /* Settings.bundle */; };
+		84F651B31E255ABB00D7CF7F /* SomeUserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F651B21E255ABB00D7CF7F /* SomeUserAnnotation.swift */; };
+		84F651B71E255CB400D7CF7F /* SomeUserAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F651B61E255CB400D7CF7F /* SomeUserAnnotationView.swift */; };
 		84F663A71E159FE600AA573D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F663A61E159FE600AA573D /* MapKit.framework */; };
 		84F663AB1E15B74F00AA573D /* LocationSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F663AA1E15B74F00AA573D /* LocationSetViewController.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +51,8 @@
 		84F462401E19700C0025F99B /* InstrumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentsViewController.swift; sourceTree = "<group>"; };
 		84F462451E1C235E0025F99B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84F462471E1E4C9F0025F99B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		84F651B21E255ABB00D7CF7F /* SomeUserAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeUserAnnotation.swift; sourceTree = "<group>"; };
+		84F651B61E255CB400D7CF7F /* SomeUserAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeUserAnnotationView.swift; sourceTree = "<group>"; };
 		84F663A61E159FE600AA573D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84F663AA1E15B74F00AA573D /* LocationSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				84F218641E0B0BDD005A6A83 /* Cloud.swift */,
+				84F651B21E255ABB00D7CF7F /* SomeUserAnnotation.swift */,
+				84F651B61E255CB400D7CF7F /* SomeUserAnnotationView.swift */,
 				8405F6F91E170ED80096D77D /* RegistrationAnnotation.swift */,
 				84DC21A21E2281AA00CDDDBF /* AvailableInstruments.swift */,
 			);
@@ -151,8 +157,8 @@
 		84F428211E0D8EBF002147BB /* Casual */ = {
 			isa = PBXGroup;
 			children = (
-				84EFA69A1E0C78350037A1C5 /* MapViewController.swift */,
 				8479B8E11E0DB7860049B67B /* ProfileViewController.swift */,
+				84EFA69A1E0C78350037A1C5 /* MapViewController.swift */,
 				8479B8E31E0DB79E0049B67B /* HomeViewController.swift */,
 			);
 			name = Casual;
@@ -244,7 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F218561E0A9780005A6A83 /* LoginViewController.swift in Sources */,
+				84F651B31E255ABB00D7CF7F /* SomeUserAnnotation.swift in Sources */,
 				84F218651E0B0BDD005A6A83 /* Cloud.swift in Sources */,
+				84F651B71E255CB400D7CF7F /* SomeUserAnnotationView.swift in Sources */,
 				84F2183D1E0A9671005A6A83 /* AppDelegate.swift in Sources */,
 				8405F6FA1E170ED80096D77D /* RegistrationAnnotation.swift in Sources */,
 				84DC21A31E2281AA00CDDDBF /* AvailableInstruments.swift in Sources */,

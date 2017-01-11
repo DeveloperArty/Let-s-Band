@@ -10,16 +10,18 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class MapViewController: UIViewController, UISplitViewControllerDelegate {
+class MapViewController: UIViewController {
     
     
     // MARK: - Outlets
     @IBOutlet weak var mainMap: MKMapView!
+    @IBOutlet weak var distanceField: UITextField!
     
     
     // MARK: - Properties 
     var locationManager = CLLocationManager()
     var setMapRegion = true
+    let cloud = Cloud()
     
     
     // MARK: - ViewController Lifecycle
@@ -38,6 +40,28 @@ class MapViewController: UIViewController, UISplitViewControllerDelegate {
         locationManager.distanceFilter = 30
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        guard let distance = distanceField.text else {
+            return
+        }
+        
+        var accs = cloud.findOtherUsersWithDistance(distance: Double(distance)!, userLocation: mainMap.userLocation.location!)
+        
+    }
+    
+    
+    
+    
+    // testing
+    @IBAction func tapToGo(_ sender: UITapGestureRecognizer) {
+        
+        view.endEditing(true)
+        
+    }
+    
     
 }
 
@@ -70,5 +94,26 @@ extension MapViewController: CLLocationManagerDelegate {
         print("an error occured; error: \(error.localizedDescription)")
     }
     
+    
+}
+
+
+// MARK: - MapView Delegate Methods
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        } 
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "SomeUser")
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SomeUser")
+        } else {
+            annotationView?.annotation = annotation
+        }
+
+//        annotationView?.image = UIImage(named: "Balalaika")
+        return annotationView
+    }
     
 }
