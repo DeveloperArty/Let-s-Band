@@ -102,18 +102,28 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // ignore user location annotation
         if annotation is MKUserLocation {
             return nil
-        } 
+        }
+        // that's what is needed
+        else if annotation is SomeUserAnnotation {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "SomeUser")
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SomeUser")
-        } else {
+        }
+        else {
             annotationView?.annotation = annotation
         }
-
-        annotationView?.image = UIImage(named: "Balalaika")
+            let ann = annotation as! SomeUserAnnotation
+        let mainInstName = ann.mainInstrument!
+        annotationView?.image = UIImage(named: mainInstName)
         return annotationView
+        }
+        // ignore 
+        else {
+            return nil
+        }
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {

@@ -204,11 +204,13 @@ class Cloud {
                 var annotationsToShow: [SomeUserAnnotation?] = []
                 
                 for record in records! {
-                    print("\(record["Nickname"]!)")
                     let locationFound = record["Location"] as! CLLocation
                     let nicknameFound = record["Nickname"] as! String
+                    let allInstruments = record["Instrumets"] as! [String]
+                    let mainInstrument = allInstruments.first
                     let annotation = SomeUserAnnotation(coordinate: locationFound.coordinate)
                     annotation.userName = nicknameFound
+                    annotation.mainInstrument = mainInstrument 
                     
                     annotationsToShow.append(annotation)
                     
