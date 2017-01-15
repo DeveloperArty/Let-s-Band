@@ -6,7 +6,9 @@
 //  Copyright © 2016 Den prod. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import CoreGraphics
 
 class ProfileViewController: UIViewController {
     
@@ -19,7 +21,6 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     let defaults = UserDefaults()
     let cloud = Cloud()
-    
     var userInsts: [String]? = nil {
         willSet {
             print("user insts loaded; new value: \(newValue!)")
@@ -46,10 +47,10 @@ class ProfileViewController: UIViewController {
     }
     
     func loadInstruments() {
-        guard let nickname = defaults.value(forKey: "nickname") as! String? else {
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
             return
         }
-        cloud.loadInstruments(nickname: nickname, senderViewController: self)
+        cloud.loadInstruments(nickname: nicknameFromDef, senderViewController: self)
     }
     
     func showInsts(instruments: [String]) {
@@ -57,22 +58,9 @@ class ProfileViewController: UIViewController {
         instScrollView.contentSize = CGSize(width: instruments.count * 90, height: 90)
         for (index, instrument) in instruments.enumerated() {
             
-            let instView = UIImageView(frame: CGRect(x: 700, y: 0, width: 90, height: 90))
+            let instView = UIImageView(frame: CGRect(x: 90 * index, y: 0, width: 90, height: 90))
             instView.image = UIImage(named: instrument)
-            
-            let duration: Double = 2
-            let delay: Double = Double(arc4random_uniform(3))
-            
-            UIView.animate(withDuration: duration,
-                           delay: delay,
-                           options: UIViewAnimationOptions.curveEaseInOut,
-                           animations: {
-                            self.instScrollView.addSubview(instView)
-                            instView.frame = CGRect(x: 90 * index, y: 0, width: 90, height: 90)
-                            print("animating")
-            },
-                           completion: nil)
-            
+            self.instScrollView.addSubview(instView)
         }
         
     }

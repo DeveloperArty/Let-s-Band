@@ -12,8 +12,14 @@ import MapKit
 class SomeUserAnnotation: NSObject, MKAnnotation {
 
     var coordinate: CLLocationCoordinate2D
-    var userName: String?
+    var userName: String? {
+        willSet {
+            self.title = newValue
+        }
+    }
+    var title: String?
     var mainInstrument: String?
+    var otherInsts = [String]()
     
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate

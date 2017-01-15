@@ -211,6 +211,7 @@ class Cloud {
                     let annotation = SomeUserAnnotation(coordinate: locationFound.coordinate)
                     annotation.userName = nicknameFound
                     annotation.mainInstrument = mainInstrument 
+                    annotation.otherInsts = allInstruments 
                     
                     annotationsToShow.append(annotation)
                     

@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var mainMap: MKMapView!
-    @IBOutlet weak var distanceField: UITextField!
     
     
     // MARK: - Properties 
@@ -42,6 +41,17 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         locationManager = CLLocationManager()
         setUpLocationManager()
+        
+        self.navigationItem.title = "Map"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let vc = segue.destination as? SomeUserProfileViewController else {
+            return
+        }
+        vc.receivedNickname = sender as? String
+        
     }
 
     
@@ -52,14 +62,6 @@ class MapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 30
         locationManager.requestWhenInUseAuthorization()
-    }
-    
-    
-    // testing
-    @IBAction func tapToGo(_ sender: UITapGestureRecognizer) {
-        
-        view.endEditing(true)
-        
     }
     
     
@@ -110,15 +112,24 @@ extension MapViewController: MKMapViewDelegate {
         else if annotation is SomeUserAnnotation {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "SomeUser")
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "SomeUser")
-        }
-        else {
+            annotationView = SomeUserAnnotationView(annotation: annotation, reuseIdentifier: "SomeUser")
+        } else {
             annotationView?.annotation = annotation
         }
             let ann = annotation as! SomeUserAnnotation
-        let mainInstName = ann.mainInstrument!
-        annotationView?.image = UIImage(named: mainInstName)
-        return annotationView
+            let mainInstName = ann.mainInstrument!
+            annotationView?.canShowCallout = true
+            
+            // resizing image for annotation view
+            let requiredImage = UIImage(named: mainInstName)
+            let size = CGSize(width: 60, height: 60)
+            UIGraphicsBeginImageContext(size)
+            requiredImage?.draw(in: CGRect(x: 0, y: 0, width: 60, height: 60))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            annotationView?.image = resizedImage
+            
+            return annotationView
         }
         // ignore 
         else {
@@ -138,6 +149,19 @@ extension MapViewController: MKMapViewDelegate {
                                          userLocation: centerScreenLocation,
                                          senderViewController: self)
         
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard let someUserAnnView = view as? SomeUserAnnotationView else {
+            print("not SomeUserAnnotationView selected")
+            return
+        }
+        let someUserAnn = someUserAnnView.annotation as! SomeUserAnnotation
+        let userNickname = someUserAnn.userName
+        print("SomeUserAnnotationView selected, nickname: \(userNickname)")
+        self.performSegue(withIdentifier: "ShowThatUserAccount", sender: userNickname)
+
     }
     
 }

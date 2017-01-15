@@ -23,7 +23,16 @@ class InstrumentsViewController: UIViewController {
             print("InstrumetsViewController has received user nickname, nickname: \(newValue)")
         }
     }
-    let intrumets = ["Balalaika", "Drums", "Guitar", "Vocal", "Piano", "Saxophone", "Violin", "Electric Guitar"]
+    let intrumets = ["Balalaika",
+                     "Drums",
+                     "Guitar",
+                     "Vocal",
+                     "Piano",
+                     "Saxophone",
+                     "Violin",
+                     "Electric Guitar",
+                     "Home Studio",
+                     "Synth"]
     
     
     // MARK: - ViewController Lifecycle

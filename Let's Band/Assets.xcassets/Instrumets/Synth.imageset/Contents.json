@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "барабаны2.png",
+      "filename" : "клава.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "барабаны2@2x.png",
+      "filename" : "клава@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "барабаны2@3x.png",
+      "filename" : "клава@3x.png",
       "scale" : "3x"
     }
   ],
