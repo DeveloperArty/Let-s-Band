@@ -6,9 +6,7 @@
 //  Copyright © 2016 Den prod. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import CoreGraphics
 
 class ProfileViewController: UIViewController {
     
@@ -55,14 +53,25 @@ class ProfileViewController: UIViewController {
     
     func showInsts(instruments: [String]) {
         
-        instScrollView.contentSize = CGSize(width: instruments.count * 90, height: 90)
-        for (index, instrument) in instruments.enumerated() {
-            
-            let instView = UIImageView(frame: CGRect(x: 90 * index, y: 0, width: 90, height: 90))
-            instView.image = UIImage(named: instrument)
-            self.instScrollView.addSubview(instView)
-        }
-        
+            DispatchQueue.main.async {
+                self.instScrollView.contentSize = CGSize(width: instruments.count * 90, height: 90)
+                
+                for (index, instrument) in instruments.enumerated() {
+                    
+                    let instView = UIImageView(frame: CGRect(x:  700, y: 0, width: 90, height: 90))
+                    instView.image = UIImage(named: instrument)
+                    self.instScrollView.addSubview(instView)
+                    
+                    UIView.animate(withDuration: 2,
+                                   delay: Double(Int(arc4random_uniform(20))/10),
+                                   options: UIViewAnimationOptions.curveEaseInOut,
+                                   animations: {
+                                    instView.frame = CGRect(x: 90 * index, y: 0, width: 90, height: 90)
+                    },
+                                   completion: nil)
+                    
+                }
+            }
     }
     
     

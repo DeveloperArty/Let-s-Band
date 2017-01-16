@@ -19,6 +19,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmation: UITextField!
     @IBOutlet weak var mailField: UITextField!
+    @IBOutlet weak var additionalInformationLabel: UITextField!
     
     
     // MARK: - Propreties
@@ -61,9 +62,12 @@ class RegistrationViewController: UIViewController {
         guard let mail = mailField.text else {
             return
         }
+        guard let addInfo = additionalInformationLabel.text else {
+            return
+        }
         let dateOfBirth = datePicker.date
         
-        cloud.registerNewUser(name: name, surname: surname, dateOfBirth: dateOfBirth, nickname: nickname, password: password, mail: mail,senderViewController: self)
+        cloud.registerNewUser(name: name, surname: surname, dateOfBirth: dateOfBirth, nickname: nickname, password: password, mail: mail, additionalInformation: addInfo,senderViewController: self)
         
         
     }

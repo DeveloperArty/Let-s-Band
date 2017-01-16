@@ -75,7 +75,7 @@ class Cloud {
         
     }
     
-    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, senderViewController: UIViewController) {
+    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, additionalInformation: String, senderViewController: UIViewController) {
         
         // saving public data
         let publicDataRecord = CKRecord(recordType: "publicUserData")
@@ -85,6 +85,7 @@ class Cloud {
         publicDataRecord["Nickname"] = nickname as CKRecordValue
         publicDataRecord["Password"] = password as CKRecordValue
         publicDataRecord["Mail"] = mail as CKRecordValue
+        publicDataRecord["Info"] = additionalInformation as CKRecordValue
         
         publicDB.save(publicDataRecord, completionHandler: { record , error in
             if error == nil {
