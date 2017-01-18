@@ -15,9 +15,6 @@ class Cloud {
     // MARK: - Properties
     let container: CKContainer
     let publicDB: CKDatabase
-    // Log In 
-    var userNicknameFound = false
-    var userPasswordFound = false
     
     
     // MARK: - Initializers
@@ -224,6 +221,12 @@ class Cloud {
         })
         
         return
+    }
+    
+    func sendPrivateDataRequest(toUserWithNickname: String, fromUserWithNickname: String) {
+        
+        
+        
     }
     
     

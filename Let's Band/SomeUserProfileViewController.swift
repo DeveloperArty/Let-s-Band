@@ -11,6 +11,11 @@ import UIKit
 class SomeUserProfileViewController: ProfileViewController {
 
     
+    // MARK: - Outlets
+    @IBOutlet weak var privateDataRequestButton: UIButton!
+    
+    
+    
     // MARK: - Properties
     var receivedNickname: String? {
         willSet {
@@ -22,9 +27,10 @@ class SomeUserProfileViewController: ProfileViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUIElements()
     }
     
-    // MARK: - Setup 
+    // MARK: - General Setup
     override func loadNickname() {
         self.nicknameLabel?.text = receivedNickname!
         print("nicknameLabel set successfully")
@@ -39,5 +45,33 @@ class SomeUserProfileViewController: ProfileViewController {
         cloud.loadInstruments(nickname: nickname, senderViewController: self)
         print("loading instruments")
     }
-
+    
+    func setupUIElements() {
+        setupRequestButton()
+    }
+    
+    
+    // MARK: - UI Setup
+    func setupRequestButton() {
+        privateDataRequestButton.layer.borderWidth = 3
+        privateDataRequestButton.layer.borderColor = UIColor.black.cgColor
+        privateDataRequestButton.layer.cornerRadius = 5
+    }
+    
+    
+    // MARK: - UI Events
+    @IBAction func requestPrivateData(_ sender: UIButton) {
+        
+        guard let nickname = nicknameLabel.text else {
+            return
+        }
+        guard let selfNickname = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        cloud.sendPrivateDataRequest(toUserWithNickname: nickname, fromUserWithNickname: selfNickname)
+        
+    }
+    
+    
+    
 }

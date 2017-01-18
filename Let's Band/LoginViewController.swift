@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var nicknameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var logInButton: UIButton!
+    @IBOutlet weak var dontHaveLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     
     //MARK: - Properties
@@ -25,6 +28,7 @@ class LoginViewController: UIViewController {
     // MARK: - ViewController Lifecycle 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +36,40 @@ class LoginViewController: UIViewController {
         checkIfLogedIn()
     }
 
+    
+    // MARK: - UI Setup
+    func setupUI() {
+        setupBackground()
+        setupTextFields()
+        setupLogInButton()
+        setupDontHaveLabel()
+        setupImageView()
+    }
+    
+    func setupBackground() {
+        view.backgroundColor = #colorLiteral(red: 0.2894832545, green: 0.7035414203, blue: 1, alpha: 1)
+    }
+    
+    func setupTextFields() {
+        nicknameField.borderStyle = .roundedRect
+        passwordField.borderStyle = .roundedRect
+    }
+    
+    func setupLogInButton() {
+        logInButton.layer.cornerRadius = 10
+        logInButton.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    }
+    
+    func setupDontHaveLabel() {
+        dontHaveLabel.textColor = UIColor.white
+    }
+    
+    func setupImageView() {
+        logoImageView.layer.cornerRadius = 15
+        logoImageView.layer.borderColor = UIColor.white.cgColor
+        logoImageView.layer.borderWidth = 3
+    }
+    
     
     // MARK: - Methods
     func checkIfLogedIn() {
