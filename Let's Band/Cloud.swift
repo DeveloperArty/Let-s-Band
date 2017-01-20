@@ -9,6 +9,7 @@
 import Foundation
 import CloudKit
 import UIKit
+import MapKit
 
 class Cloud {
     
@@ -61,9 +62,11 @@ class Cloud {
                             print("no matching passwords found")
                             return
                         }
+                        DispatchQueue.main.async {
                         print("requested password found, acccess enabled")
                         senderViewController.defaults.set(userNickname, forKey: "nickname")
                         senderViewController.performSegue(withIdentifier: "SuccessfullLogIn", sender: nil)
+                        }
                     }
                 })
 
@@ -86,8 +89,10 @@ class Cloud {
         
         publicDB.save(publicDataRecord, completionHandler: { record , error in
             if error == nil {
+                DispatchQueue.main.async {
                 print("public data saved correctly")
-                senderViewController.performSegue(withIdentifier: "ContinueRegistration", sender: nickname)
+                senderViewController.performSegue(withIdentifier: "Next", sender: nickname)
+                }
             } else {
                 print("an error occured while saving public data; error: \(error?.localizedDescription)")
             }
@@ -116,8 +121,10 @@ class Cloud {
                 record["Location"] = location as CKRecordValue
                 self.publicDB.save(record, completionHandler: { record, error in
                     if error == nil {
+                        DispatchQueue.main.async {
                         print("location added correctly")
                         senderViewController.performSegue(withIdentifier: "RegistrationAlmostDone", sender: nickname)
+                        }
                     }
                 })
             }
@@ -146,9 +153,11 @@ class Cloud {
                 record["Instrumets"] = instruments as CKRecordValue
                 self.publicDB.save(record, completionHandler: { record, error in
                     if error == nil {
+                        DispatchQueue.main.async {
                         print("user instrumets added successfully")
                         senderViewController.defaults.set(nickname, forKey: "nickname")
                         senderViewController.performSegue(withIdentifier: "RegistrationDoneSuccessfully", sender: nil)
+                        }
                     } else {
                         print("an error occured while saving user instrumets")
                     }

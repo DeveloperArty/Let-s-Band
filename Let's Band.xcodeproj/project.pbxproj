@@ -21,8 +21,6 @@
 		84F218601E0AC87D005A6A83 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2185F1E0AC87D005A6A83 /* GreetingViewController.swift */; };
 		84F218631E0AD2E3005A6A83 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F218621E0AD2E3005A6A83 /* RegistrationViewController.swift */; };
 		84F218651E0B0BDD005A6A83 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F218641E0B0BDD005A6A83 /* Cloud.swift */; };
-		84F3EEA21E30C60B00E7BC47 /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F3EEA11E30C60B00E7BC47 /* RegistrationTableViewCell.swift */; };
-		84F3EEA41E30D3A700E7BC47 /* MainDataRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F3EEA31E30D3A700E7BC47 /* MainDataRegistrationViewController.swift */; };
 		84F462411E19700C0025F99B /* InstrumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F462401E19700C0025F99B /* InstrumentsViewController.swift */; };
 		84F462461E1C235E0025F99B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F462441E1C235E0025F99B /* Main.storyboard */; };
 		84F462481E1E4C9F0025F99B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84F462471E1E4C9F0025F99B /* Settings.bundle */; };
@@ -52,8 +50,6 @@
 		84F2185F1E0AC87D005A6A83 /* GreetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		84F218621E0AD2E3005A6A83 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		84F218641E0B0BDD005A6A83 /* Cloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
-		84F3EEA11E30C60B00E7BC47 /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
-		84F3EEA31E30D3A700E7BC47 /* MainDataRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDataRegistrationViewController.swift; sourceTree = "<group>"; };
 		84F462401E19700C0025F99B /* InstrumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentsViewController.swift; sourceTree = "<group>"; };
 		84F462451E1C235E0025F99B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84F462471E1E4C9F0025F99B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -83,7 +79,6 @@
 			children = (
 				84F218641E0B0BDD005A6A83 /* Cloud.swift */,
 				84F651B21E255ABB00D7CF7F /* SomeUserAnnotation.swift */,
-				84F3EEA11E30C60B00E7BC47 /* RegistrationTableViewCell.swift */,
 				84F651B61E255CB400D7CF7F /* SomeUserAnnotationView.swift */,
 				8405F6F91E170ED80096D77D /* RegistrationAnnotation.swift */,
 				84DC21A21E2281AA00CDDDBF /* AvailableInstruments.swift */,
@@ -158,7 +153,6 @@
 				84F218551E0A9780005A6A83 /* LoginViewController.swift */,
 				84F2185F1E0AC87D005A6A83 /* GreetingViewController.swift */,
 				84F218621E0AD2E3005A6A83 /* RegistrationViewController.swift */,
-				84F3EEA31E30D3A700E7BC47 /* MainDataRegistrationViewController.swift */,
 				84F663AA1E15B74F00AA573D /* LocationSetViewController.swift */,
 				84F462401E19700C0025F99B /* InstrumentsViewController.swift */,
 			);
@@ -272,11 +266,9 @@
 				84F218601E0AC87D005A6A83 /* GreetingViewController.swift in Sources */,
 				84FD87261E2C238500B3BDE1 /* SomeUserProfileViewController.swift in Sources */,
 				8479B8E41E0DB79E0049B67B /* HomeViewController.swift in Sources */,
-				84F3EEA21E30C60B00E7BC47 /* RegistrationTableViewCell.swift in Sources */,
 				84F218631E0AD2E3005A6A83 /* RegistrationViewController.swift in Sources */,
 				8479B8E21E0DB7860049B67B /* ProfileViewController.swift in Sources */,
 				84F462411E19700C0025F99B /* InstrumentsViewController.swift in Sources */,
-				84F3EEA41E30D3A700E7BC47 /* MainDataRegistrationViewController.swift in Sources */,
 				84F663AB1E15B74F00AA573D /* LocationSetViewController.swift in Sources */,
 				84EFA69B1E0C78350037A1C5 /* MapViewController.swift in Sources */,
 				84FD677D1E2F600D008E3DF8 /* ColorExtensions.swift in Sources */,
