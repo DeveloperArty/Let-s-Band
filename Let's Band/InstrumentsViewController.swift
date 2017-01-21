@@ -13,6 +13,7 @@ class InstrumentsViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var letsBandButton: UIButton!
     
     
     // MARK: - Properties
@@ -89,6 +90,25 @@ extension InstrumentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 70))
+        view.backgroundColor = #colorLiteral(red: 0.2894832545, green: 0.7035414203, blue: 1, alpha: 1)
+        let textLabel = UILabel(frame: CGRect(x: 10, y: 30, width: 300, height: 30))
+        view.addSubview(textLabel)
+        textLabel.font = textLabel.font.withSize(24)
+        textLabel.text = "Select your instruments"
+        textLabel.textColor = UIColor.white
+        return view
+    }
+//    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Select your instruments"
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
     }
     
 }

@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 class LocationSetViewController: UIViewController {
-
+    
     
     // MARK: - Outlets 
     @IBOutlet weak var mapView: MKMapView!
@@ -44,6 +44,11 @@ class LocationSetViewController: UIViewController {
         setUpLocationManager()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentPopover()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? InstrumentsViewController else {
             return
@@ -60,6 +65,13 @@ class LocationSetViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
     
+    func presentPopover() {
+        let alert = UIAlertController(title: "Set your location", message: "Other users will see you where the cat is. Once you're ready, just tap the map! You could change your location later in your profile settings", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     // MARK: - UIEvents
     @IBAction func userTappedMap(_ sender: UITapGestureRecognizer) {
@@ -74,7 +86,6 @@ class LocationSetViewController: UIViewController {
         }
         
     }
-    
     
 }
 
