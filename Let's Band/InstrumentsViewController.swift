@@ -102,10 +102,6 @@ extension InstrumentsViewController: UITableViewDelegate {
         textLabel.textColor = UIColor.white
         return view
     }
-//    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Select your instruments"
-//    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 70

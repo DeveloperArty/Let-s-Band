@@ -66,7 +66,7 @@ class LocationSetViewController: UIViewController {
     }
     
     func presentPopover() {
-        let alert = UIAlertController(title: "Set your location", message: "Other users will see you where the cat is. Once you're ready, just tap the map! You could change your location later in your profile settings", preferredStyle: .alert)
+        let alert = UIAlertController(title: "🙋Set your location🙋‍♂️", message: "Other users will see you where the cat is (in center). Once you're ready, just tap the map! You could change your location later in your profile settings", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)

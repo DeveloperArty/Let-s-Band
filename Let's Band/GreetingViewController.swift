@@ -13,12 +13,19 @@ class GreetingViewController: UIViewController {
     
     // MARK: - UI Outlets
     @IBOutlet weak var yepButton: UIButton!
+    @IBOutlet weak var myPhotoImageView: UIImageView!
     
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
+    
+    // MARK: - UI Setup
+    func setupUI() {
+        yepButton.layer.cornerRadius = 30
+    }
     
 }
