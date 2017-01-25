@@ -131,6 +131,7 @@ class Cloud {
                 })
             }
         })
+        
     }
     
     func addUserInstruments(nickname: String, instruments: [String], senderViewController: InstrumentsViewController) {
@@ -313,6 +314,67 @@ class Cloud {
                 
                 senderViewController.mail = record["Mail"] as? String
                 return
+            }
+        })
+        
+    }
+    
+    
+    // MARK: - Data Update 
+    func updateUserMail(nickname: String, newMail: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                record["Mail"] = newMail as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("mail updated correctly")
+                        senderViewController.mail = newMail
+                        return
+                    }
+                })
+            }
+        })
+        
+    }
+    
+    func updateUserAddInfo(nickname: String, newInfo: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                record["Info"] = newInfo as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("additional information updated correctly")
+                        senderViewController.addInfo = newInfo
+                    }
+                })
             }
         })
         

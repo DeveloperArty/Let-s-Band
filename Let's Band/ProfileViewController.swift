@@ -20,11 +20,15 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var linksView: UIView!
     @IBOutlet weak var mailLabel: UILabel!
+    @IBOutlet weak var changeLocatioButton: UIButton!
+    @IBOutlet weak var editInstsButton: UIButton!
     
     
     // MARK: - Properties
+    // Cloud
     let defaults = UserDefaults()
     let cloud = Cloud()
+    // for UI update
     var userInsts: [String]? = nil {
         willSet {
             print("user insts loaded; new value: \(newValue!)")
@@ -61,7 +65,8 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
+    // Flags
+    var userIsEditingNow = false
 
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -80,6 +85,19 @@ class ProfileViewController: UIViewController {
         
         if editButton != nil {
             editButton.layer.cornerRadius = 10 
+        }
+        
+        if changeLocatioButton != nil {
+            changeLocatioButton.layer.cornerRadius = 10
+            changeLocatioButton.isEnabled = false
+            changeLocatioButton.isHidden = true
+        }
+        if editInstsButton != nil {
+            editInstsButton.layer.cornerRadius = 10
+            editInstsButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).cgColor
+            editInstsButton.layer.borderWidth = 2
+            editInstsButton.isEnabled = false
+            editInstsButton.isHidden = true
         }
     }
     
@@ -171,6 +189,79 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func editProfile(_ sender: UIButton) {
+        
+        if userIsEditingNow == false {
+            DispatchQueue.main.async {
+                self.editButton.setTitle("Done", for: .normal)
+                self.editButton.backgroundColor = UIColor.black
+                
+                self.addInfoTextView.isUserInteractionEnabled = true
+            
+                let mailRect = self.mailLabel.frame
+                let textField = UITextField(frame: mailRect)
+                textField.layer.cornerRadius = 10 
+                self.linksView.addSubview(textField)
+                textField.placeholder = "mail"
+                textField.backgroundColor = UIColor.white
+                textField.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                
+                self.userIsEditingNow = true
+                
+                self.editInstsButton.isEnabled = true
+                self.editInstsButton.isHidden = false
+                
+                self.changeLocatioButton.isEnabled = true
+                self.changeLocatioButton.isHidden = false
+            }
+        } else {
+                DispatchQueue.main.async {
+                    
+                    self.editButton.setTitle("Edit", for: .normal)
+                    self.editButton.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                    
+                    self.addInfoTextView.isUserInteractionEnabled = false
+                    
+                    guard let nicknameFromDef = self.defaults.value(forKey: "nickname") as! String? else {
+                        return
+                    }
+                    
+                    
+                    if let textField = self.linksView.subviews.last as? UITextField {
+                        if textField.text != "" && textField.text != nil {
+                            print("new mail")
+                            let newMail = textField.text!
+                            self.cloud.updateUserMail(nickname: nicknameFromDef,
+                                                 newMail: newMail,
+                                                 senderViewController: self)
+                        }
+                        textField.removeFromSuperview()
+                    }
+                    
+                    
+                    if self.addInfoTextView.text != self.addInfo {
+                        self.cloud.updateUserAddInfo(nickname: nicknameFromDef,
+                                                newInfo: self.addInfoTextView.text,
+                                                senderViewController: self)
+                    }
+                    
+                    self.addInfoTextView.text = self.addInfo
+                    
+                    self.userIsEditingNow = false
+                    
+                    self.editInstsButton.isEnabled = false
+                    self.editInstsButton.isHidden = true
+                    
+                    
+                    self.changeLocatioButton.isEnabled = false
+                    self.changeLocatioButton.isHidden = true
+            }
+        }
+        
     }
     
+    @IBAction func backgroundTap(_ sender: UITapGestureRecognizer) {
+        
+        self.view.endEditing(true)
+        
+    }
 }
