@@ -48,7 +48,7 @@ class Cloud {
                     print("error: record creator not found")
                     return
                 }
-                print("record creator found, user id: \(recordCreatorID)")
+                print("record creator found")
                 
                 // password check for the specific user
                 let passwordPredicate = NSPredicate(format: "Password = %@ && creatorUserRecordID = %@", userPassword, recordCreatorID)
@@ -191,6 +191,81 @@ class Cloud {
         
     }
     
+    func loadNameSurnameFor(nickname: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                let name = record["Name"] as! String
+                let surname = record["Surname"] as! String
+                
+                senderViewController.nameSurname = name + " " + surname
+                return
+            }
+        })
+        
+    }
+    
+    func loadAgeFor(nickname: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                
+                let dateOfBirth = record["DateOfBirth"] as! Date
+                let currentDate = Date()
+                
+                let calendar = Calendar.current
+                let componentsB = calendar.dateComponents([.day , .month , .year], from: dateOfBirth)
+                let componentsC = calendar.dateComponents([.day , .month , .year], from: currentDate)
+                
+                let yearB =  componentsB.year!
+                let monthB = componentsB.month!
+                let dayB = componentsB.day!
+        
+                let yearC = componentsC.year!
+                let monthC = componentsC.month!
+                let dayC = componentsC.day!
+                
+                var age = yearC - yearB
+                if monthC < monthB {
+                    age -= 1
+                } else if monthC == monthB && dayC < dayB {
+                    age -= 1
+                }
+                
+                senderViewController.age = age
+                return
+            }
+        })
+
+        
+    }
+    
     func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation, senderViewController: MapViewController) {
         
         let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f", userLocation, distance)
@@ -231,12 +306,5 @@ class Cloud {
         
         return
     }
-    
-    func sendPrivateDataRequest(toUserWithNickname: String, fromUserWithNickname: String) {
-        
-        
-        
-    }
-    
     
 }

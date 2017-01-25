@@ -12,7 +12,6 @@ class SomeUserProfileViewController: ProfileViewController {
 
     
     // MARK: - Outlets
-    @IBOutlet weak var privateDataRequestButton: UIButton!
     
     
     
@@ -36,6 +35,22 @@ class SomeUserProfileViewController: ProfileViewController {
         print("nicknameLabel set successfully")
     }
     
+    override func loadNameSurname() {
+        guard let nickname = receivedNickname else {
+            print("can not load name surname")
+            return
+        }
+        cloud.loadNameSurnameFor(nickname: nickname, senderViewController: self)
+    }
+    
+    override func loadAge() {
+        guard let nickname = receivedNickname else {
+            print("can not load age")
+            return
+        }
+        cloud.loadAgeFor(nickname: nickname, senderViewController: self)
+    }
+    
     override func loadInstruments() {
         
         guard let nickname = receivedNickname else {
@@ -47,31 +62,18 @@ class SomeUserProfileViewController: ProfileViewController {
     }
     
     func setupUIElements() {
-        setupRequestButton()
+        
     }
     
     
     // MARK: - UI Setup
-    func setupRequestButton() {
-        privateDataRequestButton.layer.borderWidth = 3
-        privateDataRequestButton.layer.borderColor = UIColor.black.cgColor
-        privateDataRequestButton.layer.cornerRadius = 5
-    }
+    
     
     
     // MARK: - UI Events
-    @IBAction func requestPrivateData(_ sender: UIButton) {
-        
-        guard let nickname = nicknameLabel.text else {
-            return
-        }
-        guard let selfNickname = defaults.value(forKey: "nickname") as! String? else {
-            return
-        }
-        cloud.sendPrivateDataRequest(toUserWithNickname: nickname, fromUserWithNickname: selfNickname)
-        
-    }
     
     
+    
+
     
 }

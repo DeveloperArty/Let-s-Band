@@ -15,6 +15,8 @@ class LocationSetViewController: UIViewController {
     
     // MARK: - Outlets 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var popoverView: UIView!
+    @IBOutlet weak var yepButton: UIButton!
     
     
     // MARK: - Properties
@@ -42,12 +44,17 @@ class LocationSetViewController: UIViewController {
         super.viewDidLoad()
         locationManager = CLLocationManager()
         setUpLocationManager()
+        setupUI()
+        popoverView.alpha = 0
+        self.mapView.isUserInteractionEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presentPopover()
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? InstrumentsViewController else {
@@ -58,6 +65,11 @@ class LocationSetViewController: UIViewController {
     
     
     // MARK: - Methods
+    func setupUI() {
+        yepButton.layer.cornerRadius = 25
+
+    }
+    
     func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -66,10 +78,19 @@ class LocationSetViewController: UIViewController {
     }
     
     func presentPopover() {
-        let alert = UIAlertController(title: "🙋Set your location🙋‍♂️", message: "Other users will see you where the cat is (in center). Once you're ready, just tap the map! You could change your location later in your profile settings", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+        UIView.animate(withDuration: 1,
+                       delay: 2,
+                       options: .curveEaseInOut,
+                       animations: {
+                        self.popoverView.alpha = 1
+        },
+                       completion: { bool in
+                        self.mapView.isUserInteractionEnabled = true
+        } )
+        }
+        
     }
     
     
@@ -84,6 +105,12 @@ class LocationSetViewController: UIViewController {
             userLocation = CLLocation(latitude: userCoordinateLatitude, longitude: userCoordinateLongitude)
             ignoreMapTap = true
         }
+        
+    }
+    
+    @IBAction func hidePopover(_ sender: UIButton) {
+        
+        popoverView.isHidden = true
         
     }
     

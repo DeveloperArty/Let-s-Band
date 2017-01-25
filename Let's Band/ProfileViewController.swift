@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var instScrollView: UIScrollView!
+    @IBOutlet weak var nameSurnameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
     
     
     // MARK: - Properties
@@ -23,6 +25,22 @@ class ProfileViewController: UIViewController {
         willSet {
             print("user insts loaded; new value: \(newValue!)")
             self.showInsts(instruments: newValue!)
+        }
+    }
+    var nameSurname: String? {
+        willSet {
+            print("Name Surname: \(newValue)")
+            DispatchQueue.main.async {
+                self.nameSurnameLabel.text = newValue!
+            }
+        }
+    }
+    var age: Int? {
+        willSet {
+            print("age: \(newValue)")
+            DispatchQueue.main.async {
+                self.ageLabel.text = "\(newValue!) y.o."
+            }
         }
     }
     
@@ -38,6 +56,8 @@ class ProfileViewController: UIViewController {
     func updateUserInfo() {
         loadNickname()
         loadInstruments()
+        loadNameSurname()
+        loadAge()
     }
     
     func loadNickname() {
@@ -49,6 +69,20 @@ class ProfileViewController: UIViewController {
             return
         }
         cloud.loadInstruments(nickname: nicknameFromDef, senderViewController: self)
+    }
+    
+    func loadNameSurname() {
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        cloud.loadNameSurnameFor(nickname: nicknameFromDef, senderViewController: self)
+    }
+    
+    func loadAge() {
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        cloud.loadAgeFor(nickname: nicknameFromDef, senderViewController: self)
     }
     
     func showInsts(instruments: [String]) {
