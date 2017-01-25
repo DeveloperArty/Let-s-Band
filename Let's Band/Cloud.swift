@@ -25,7 +25,7 @@ class Cloud {
     }
     
     
-    // MARK: - Cloud Methods
+    // MARK: - Log In:
     
     func logIn(userNickname: String, userPassword: String, senderViewController: LoginViewController) {
 
@@ -75,6 +75,8 @@ class Cloud {
         
     }
     
+    
+    // MARK: - Registration:
     func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, additionalInformation: String, senderViewController: UIViewController) {
         
         // saving public data
@@ -166,6 +168,8 @@ class Cloud {
         })
     }
     
+    
+    // MARK: - Loading data from the cloud
     func loadInstruments(nickname: String, senderViewController: ProfileViewController) {
         
         let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
@@ -262,10 +266,60 @@ class Cloud {
                 return
             }
         })
-
+    }
+    
+    func loadAddInfoFor(nickname: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                
+                senderViewController.addInfo = record["Info"] as? String
+                return
+            }
+        })
         
     }
     
+    func loadMailFor(nickname: String, senderViewController: ProfileViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                
+                senderViewController.mail = record["Mail"] as? String
+                return
+            }
+        })
+        
+    }
+    
+    
+    // MARK: - Seach for users
     func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation, senderViewController: MapViewController) {
         
         let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f", userLocation, distance)

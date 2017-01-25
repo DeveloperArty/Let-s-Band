@@ -16,6 +16,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var instScrollView: UIScrollView!
     @IBOutlet weak var nameSurnameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var addInfoTextView: UITextView!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var linksView: UIView!
+    @IBOutlet weak var mailLabel: UILabel!
     
     
     // MARK: - Properties
@@ -43,21 +47,49 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    var addInfo: String? {
+        willSet {
+            DispatchQueue.main.async {
+                self.addInfoTextView.text = newValue! 
+            }
+        }
+    }
+    var mail: String? {
+        willSet {
+            DispatchQueue.main.async {
+                self.mailLabel.text = newValue! 
+            }
+        }
+    }
     
 
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUserInfo()
+        setupUI()
     }
     
     
     // MARK: - Setup
+    func setupUI() {
+        addInfoTextView.isUserInteractionEnabled = false
+        addInfoTextView.layer.cornerRadius = 10
+        
+        linksView.layer.cornerRadius = 10
+        
+        if editButton != nil {
+            editButton.layer.cornerRadius = 10 
+        }
+    }
+    
     func updateUserInfo() {
         loadNickname()
         loadInstruments()
         loadNameSurname()
         loadAge()
+        loadAddInfo()
+        loadLinks()
     }
     
     func loadNickname() {
@@ -83,6 +115,20 @@ class ProfileViewController: UIViewController {
             return
         }
         cloud.loadAgeFor(nickname: nicknameFromDef, senderViewController: self)
+    }
+    
+    func loadAddInfo() {
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        cloud.loadAddInfoFor(nickname: nicknameFromDef, senderViewController: self)
+    }
+    
+    func loadLinks() {
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        cloud.loadMailFor(nickname: nicknameFromDef, senderViewController: self)
     }
     
     func showInsts(instruments: [String]) {
@@ -113,9 +159,18 @@ class ProfileViewController: UIViewController {
     
     // MARK: - UI Events
     @IBAction func logOut(_ sender: UIButton) {
-        defaults.set("-", forKey: "nickname")
-        self.performSegue(withIdentifier: "LogOut", sender: nil)
+        let alert = UIAlertController(title: "Are you shure?", message: "We will miss you!", preferredStyle: .actionSheet)
+        let actionOut = UIAlertAction(title: "Yep, I'm shure", style: .destructive, handler: { acto in
+            self.defaults.set("-", forKey: "nickname")
+            self.performSegue(withIdentifier: "LogOut", sender: nil)
+        })
+        let actionCancel = UIAlertAction(title: "Never mind..", style: .cancel, handler: nil)
+        alert.addAction(actionOut)
+        alert.addAction(actionCancel)
+        self.present(alert, animated: true, completion: nil)
     }
 
+    @IBAction func editProfile(_ sender: UIButton) {
+    }
     
 }

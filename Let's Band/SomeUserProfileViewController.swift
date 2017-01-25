@@ -9,10 +9,6 @@
 import UIKit
 
 class SomeUserProfileViewController: ProfileViewController {
-
-    
-    // MARK: - Outlets
-    
     
     
     // MARK: - Properties
@@ -26,7 +22,6 @@ class SomeUserProfileViewController: ProfileViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUIElements()
     }
     
     // MARK: - General Setup
@@ -41,6 +36,7 @@ class SomeUserProfileViewController: ProfileViewController {
             return
         }
         cloud.loadNameSurnameFor(nickname: nickname, senderViewController: self)
+        print("1")
     }
     
     override func loadAge() {
@@ -49,6 +45,7 @@ class SomeUserProfileViewController: ProfileViewController {
             return
         }
         cloud.loadAgeFor(nickname: nickname, senderViewController: self)
+        print("1")
     }
     
     override func loadInstruments() {
@@ -58,22 +55,26 @@ class SomeUserProfileViewController: ProfileViewController {
             return
         }
         cloud.loadInstruments(nickname: nickname, senderViewController: self)
-        print("loading instruments")
+        print("1")
     }
     
-    func setupUIElements() {
-        
+    override func loadAddInfo() {
+        guard let nickname = receivedNickname else {
+            print("can not load info")
+            return
+        }
+        cloud.loadAddInfoFor(nickname: nickname, senderViewController: self)
+        print("1")
     }
     
-    
-    // MARK: - UI Setup
-    
-    
-    
-    // MARK: - UI Events
-    
-    
-    
+    override func loadLinks() {
+        guard let nickname = receivedNickname else {
+            print("can not load mail")
+            return
+        }
+        cloud.loadMailFor(nickname: nickname, senderViewController: self)
+        print("1")
+    }
 
     
 }
