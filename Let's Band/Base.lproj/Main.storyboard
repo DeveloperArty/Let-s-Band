@@ -20,7 +20,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ozW-JU-MN0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RS9-81-kOL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo Blue" translatesAutoresizingMaskIntoConstraints="NO" id="8uj-my-6zP">
@@ -114,7 +114,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-506" y="-958"/>
+            <point key="canvasLocation" x="1758" y="-2938"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jrz-N7-zVF">
@@ -265,6 +265,9 @@
                                                 <state key="normal" title="Change location">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="ZAJ-vO-FKG" kind="show" identifier="ChangeLocation" id="Owf-Q5-hlQ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPX-KV-ATc">
                                                 <rect key="frame" x="172.5" y="0.0" width="162.5" height="50"/>
@@ -278,6 +281,9 @@
                                                 <state key="disabled">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="fqO-WR-Sfq" kind="show" identifier="ChangeInstruments" id="TBz-Tg-uRM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -353,7 +359,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3100" y="-958.92053973013503"/>
+            <point key="canvasLocation" x="2684" y="-1169"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Oy6-yT-c2P">
@@ -1909,6 +1915,7 @@
                         <outlet property="popoverView" destination="Zaw-Bi-X2z" id="25i-bJ-8UF"/>
                         <outlet property="yepButton" destination="QDn-xJ-qa5" id="9Ut-m5-z1V"/>
                         <segue destination="fqO-WR-Sfq" kind="show" identifier="RegistrationAlmostDone" id="hQf-Cd-r7o"/>
+                        <segue destination="gMY-S9-4vg" kind="show" identifier="BackToProfile" id="qqd-Ox-qsx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MlW-wC-1cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1918,7 +1925,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-506.39999999999998" y="184.40779610194903"/>
+            <point key="canvasLocation" x="-506" y="98"/>
         </scene>
         <!--Instruments View Controller-->
         <scene sceneID="Sua-vy-D8Y">
@@ -1933,7 +1940,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qq0-vD-FBR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="680"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="631"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rfT-Sr-9KY">
                                     <rect key="frame" x="0.0" y="128" width="375" height="51"/>
@@ -1953,7 +1960,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="klp-3a-RDu" id="oSL-Za-0Pa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1975,12 +1982,12 @@
                     <connections>
                         <outlet property="letsBandButton" destination="rfT-Sr-9KY" id="hIq-Sh-GR1"/>
                         <outlet property="tableView" destination="Qq0-vD-FBR" id="uQy-5W-nja"/>
-                        <segue destination="gMY-S9-4vg" kind="show" identifier="RegistrationDoneSuccessfully" id="8Sb-Bx-b2T"/>
+                        <segue destination="gMY-S9-4vg" kind="show" identifier="ToMain" id="8Sb-Bx-b2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZP-8e-oaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468" y="185"/>
+            <point key="canvasLocation" x="524" y="901"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="LbA-cb-ztI">
@@ -1999,7 +2006,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cce-xl-ahk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1759" y="99"/>
+            <point key="canvasLocation" x="1758" y="537"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fIS-Vv-c5h">
@@ -2195,6 +2202,8 @@
         <image name="Profile" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nye-a6-Qko"/>
+        <segue reference="8Sb-Bx-b2T"/>
+        <segue reference="TBz-Tg-uRM"/>
+        <segue reference="Owf-Q5-hlQ"/>
     </inferredMetricsTieBreakers>
 </document>

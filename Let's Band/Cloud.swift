@@ -159,7 +159,7 @@ class Cloud {
                         DispatchQueue.main.async {
                         print("user instrumets added successfully")
                         senderViewController.defaults.set(nickname, forKey: "nickname")
-                        senderViewController.performSegue(withIdentifier: "RegistrationDoneSuccessfully", sender: nil)
+                        senderViewController.performSegue(withIdentifier: "ToMain", sender: nil)
                         }
                     } else {
                         print("an error occured while saving user instrumets")
@@ -373,6 +373,69 @@ class Cloud {
                     if error == nil {
                         print("additional information updated correctly")
                         senderViewController.addInfo = newInfo
+                    }
+                })
+            }
+        })
+        
+    }
+    
+    func updateUserLocation(nickname: String, newLocation: CLLocation, senderVC: LocationSetViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    senderVC.ignoreMapTap = false
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                record["Location"] = newLocation as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("location information updated correctly")
+                        DispatchQueue.main.async {
+                        senderVC.performSegue(withIdentifier: "BackToProfile", sender: nil)
+                        }
+                    }
+                })
+            }
+        })
+
+    }
+    
+    func updateUserInsts(nickname: String, newInsts: [String], senderVC: InstrumentsViewController) {
+        
+        let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
+        let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
+        
+        publicDB.perform(nicknameQuery, inZoneWith: nil, completionHandler: { records, error in
+            if error != nil {
+                print("an error occured while performing a nickname query, error: \(error?.localizedDescription)")
+                return
+            } else {
+                guard records?.isEmpty == false else {
+                    print("no records found")
+                    return
+                }
+                guard let record = records?.first else {
+                    return
+                }
+                record["Instrumets"] = newInsts as CKRecordValue
+                self.publicDB.save(record, completionHandler: { record, error in
+                    if error == nil {
+                        print("instruments information updated correctly")
+                        DispatchQueue.main.async {
+                            senderVC.performSegue(withIdentifier: "ToMain", sender: nil)
+                        }
                     }
                 })
             }

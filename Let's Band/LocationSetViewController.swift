@@ -23,8 +23,10 @@ class LocationSetViewController: UIViewController {
     let cloud = Cloud()
     // map
     var locationManager = CLLocationManager()
+    // flags
     var setMapRegion = true
     var ignoreMapTap = false
+    var senderIsProfileVC = false 
     // data to save in the cloud
     var userLocation: CLLocation? {
         willSet {
@@ -98,12 +100,30 @@ class LocationSetViewController: UIViewController {
     @IBAction func userTappedMap(_ sender: UITapGestureRecognizer) {
         
         if ignoreMapTap == false {
-            let annotation = RegistrationAnnotation(coordinate: mapView.centerCoordinate)
-            mapView.addAnnotation(annotation)
-            let userCoordinateLatitude = mapView.centerCoordinate.latitude
-            let userCoordinateLongitude = mapView.centerCoordinate.longitude
-            userLocation = CLLocation(latitude: userCoordinateLatitude, longitude: userCoordinateLongitude)
-            ignoreMapTap = true
+            
+            if senderIsProfileVC == false {
+            
+                let annotation = RegistrationAnnotation(coordinate: mapView.centerCoordinate)
+                mapView.addAnnotation(annotation)
+                let userCoordinateLatitude = mapView.centerCoordinate.latitude
+                let userCoordinateLongitude = mapView.centerCoordinate.longitude
+                userLocation = CLLocation(latitude: userCoordinateLatitude,
+                                          longitude: userCoordinateLongitude)
+                ignoreMapTap = true
+                
+            } else {
+                
+                let annotation = RegistrationAnnotation(coordinate: mapView.centerCoordinate)
+                mapView.addAnnotation(annotation)
+                let userCoordinateLatitude = mapView.centerCoordinate.latitude
+                let userCoordinateLongitude = mapView.centerCoordinate.longitude
+                let newUserLocation = CLLocation(latitude: userCoordinateLatitude, longitude: userCoordinateLongitude)
+                cloud.updateUserLocation(nickname: self.receivedNickname,
+                                         newLocation: newUserLocation,
+                                         senderVC: self)
+                ignoreMapTap = true
+                
+            }
         }
         
     }

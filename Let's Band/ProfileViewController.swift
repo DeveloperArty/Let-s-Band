@@ -75,6 +75,21 @@ class ProfileViewController: UIViewController {
         setupUI()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
+            return
+        }
+        if let vc = segue.destination as? LocationSetViewController {
+            vc.senderIsProfileVC = true
+            vc.receivedNickname = nicknameFromDef
+        } else if let vc = segue.destination as? InstrumentsViewController {
+            vc.senderIsProfileVC = true
+            vc.receivedNickname = nicknameFromDef 
+        }
+        
+    }
+    
     
     // MARK: - Setup
     func setupUI() {

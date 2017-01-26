@@ -34,6 +34,8 @@ class InstrumentsViewController: UIViewController {
                      "Electric Guitar",
                      "Home Studio",
                      "Synth"]
+    //flags
+    var senderIsProfileVC = false 
     
     
     // MARK: - ViewController Lifecycle
@@ -44,6 +46,7 @@ class InstrumentsViewController: UIViewController {
     
     // MARK: - UI Events
     @IBAction func letsBandButtonPressed(_ sender: UIButton) {
+        
         guard let selectedInstsIndexPaths = tableView.indexPathsForSelectedRows else {
             return
         }
@@ -51,7 +54,12 @@ class InstrumentsViewController: UIViewController {
         for indexPath in selectedInstsIndexPaths {
             selectedInsts.append(self.intrumets.sorted()[indexPath.row])
         }
+        if senderIsProfileVC == false {
         cloud.addUserInstruments(nickname: self.receivedNickname, instruments: selectedInsts, senderViewController: self)
+        } else {
+            cloud.updateUserInsts(nickname: receivedNickname, newInsts: selectedInsts, senderVC: self)
+        }
+        
     }
     
 }
