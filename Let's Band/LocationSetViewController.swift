@@ -83,7 +83,7 @@ class LocationSetViewController: UIViewController {
         
         DispatchQueue.main.async {
         UIView.animate(withDuration: 1,
-                       delay: 2,
+                       delay: 1.5,
                        options: .curveEaseInOut,
                        animations: {
                         self.popoverView.alpha = 1

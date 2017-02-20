@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupBackground() {
-        view.backgroundColor = #colorLiteral(red: 0.2894832545, green: 0.7035414203, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.2192608118, green: 0.6159325838, blue: 0.9699067473, alpha: 1)
     }
     
     func setupTextFields() {

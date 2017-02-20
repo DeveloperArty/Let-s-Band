@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameSurnameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var addInfoTextView: UITextView!
+    @IBOutlet weak var addInfoBackgroundView: UIView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var linksView: UIView!
     @IBOutlet weak var mailLabel: UILabel!
@@ -94,9 +95,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Setup
     func setupUI() {
         addInfoTextView.isUserInteractionEnabled = false
-        addInfoTextView.layer.cornerRadius = 10
+        addInfoTextView.layer.cornerRadius = 0
         
-        linksView.layer.cornerRadius = 10
+        linksView.layer.cornerRadius = 0
         
         if editButton != nil {
             editButton.layer.cornerRadius = 10 
@@ -110,7 +111,7 @@ class ProfileViewController: UIViewController {
         if editInstsButton != nil {
             editInstsButton.layer.cornerRadius = 10
             editInstsButton.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).cgColor
-            editInstsButton.layer.borderWidth = 2
+            editInstsButton.layer.borderWidth = 5
             editInstsButton.isEnabled = false
             editInstsButton.isHidden = true
         }
@@ -216,9 +217,12 @@ class ProfileViewController: UIViewController {
                 let textField = UITextField(frame: mailRect)
                 textField.layer.cornerRadius = 10 
                 self.linksView.addSubview(textField)
-                textField.placeholder = "mail"
+                textField.placeholder = "  mail"
                 textField.backgroundColor = UIColor.white
                 textField.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                
+                self.addInfoBackgroundView.backgroundColor = UIColor.white
+                self.addInfoTextView.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
                 
                 self.userIsEditingNow = true
                 
@@ -253,11 +257,13 @@ class ProfileViewController: UIViewController {
                     }
                     
                     
-                    if self.addInfoTextView.text != self.addInfo {
+                    if self.addInfoTextView.text != self.addInfo && self.addInfoTextView.text != nil {
                         self.cloud.updateUserAddInfo(nickname: nicknameFromDef,
                                                 newInfo: self.addInfoTextView.text,
                                                 senderViewController: self)
                     }
+                    self.addInfoBackgroundView.backgroundColor = #colorLiteral(red: 0.273993969, green: 0.7009065747, blue: 0.9813830256, alpha: 1)
+                    self.addInfoTextView.textColor = UIColor.white
                     
                     self.addInfoTextView.text = self.addInfo
                     

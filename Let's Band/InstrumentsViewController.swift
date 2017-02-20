@@ -57,6 +57,8 @@ class InstrumentsViewController: UIViewController {
         if senderIsProfileVC == false {
         cloud.addUserInstruments(nickname: self.receivedNickname, instruments: selectedInsts, senderViewController: self)
         } else {
+            print(receivedNickname)
+            print(selectedInsts)
             cloud.updateUserInsts(nickname: receivedNickname, newInsts: selectedInsts, senderVC: self)
         }
         

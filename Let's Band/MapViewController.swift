@@ -39,6 +39,7 @@ class MapViewController: UIViewController {
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("did load map vc")
         locationManager = CLLocationManager()
         setUpLocationManager()
         

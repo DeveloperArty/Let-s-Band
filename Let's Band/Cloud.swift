@@ -436,6 +436,8 @@ class Cloud {
                         DispatchQueue.main.async {
                             senderVC.performSegue(withIdentifier: "ToMain", sender: nil)
                         }
+                    } else {
+                        print("an error occured while updating instruments; error: \(error?.localizedDescription)")
                     }
                 })
             }
@@ -445,7 +447,7 @@ class Cloud {
     
     
     // MARK: - Seach for users
-    func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation, senderViewController: MapViewController) {
+    func findOtherUsersWithDistance(distance: Double, userLocation: CLLocation, senderViewController: UIViewController) {
         
         let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f", userLocation, distance)
         let userQuery = CKQuery(recordType: "publicUserData", predicate: userPredicate)
@@ -460,30 +462,99 @@ class Cloud {
                     return
                 }
                 
-                print("distance: \(distance)")
-                
-                var annotationsToShow: [SomeUserAnnotation?] = []
-                
-                for record in records! {
-                    let locationFound = record["Location"] as! CLLocation
-                    let nicknameFound = record["Nickname"] as! String
-                    let allInstruments = record["Instrumets"] as! [String]
-                    let mainInstrument = allInstruments.first
-                    let annotation = SomeUserAnnotation(coordinate: locationFound.coordinate)
-                    annotation.userName = nicknameFound
-                    annotation.mainInstrument = mainInstrument 
-                    annotation.otherInsts = allInstruments 
+                if let senderVC = senderViewController as? MapViewController {
                     
-                    annotationsToShow.append(annotation)
+                    print("distance: \(distance)")
+                    var annotationsToShow: [SomeUserAnnotation?] = []
+                    for record in records! {
+                        let locationFound = record["Location"] as! CLLocation
+                        let nicknameFound = record["Nickname"] as! String
+                        let allInstruments = record["Instrumets"] as! [String]
+                        let mainInstrument = allInstruments.first
+                        let annotation = SomeUserAnnotation(coordinate: locationFound.coordinate)
+                        annotation.userName = nicknameFound
+                        annotation.mainInstrument = mainInstrument
+                        annotation.otherInsts = allInstruments
+                        annotationsToShow.append(annotation)
+                    }
+                    print("annotations to send farther: \(annotationsToShow.count)")
+                    senderVC.annotationsToShow = annotationsToShow
                     
+                } else if let senderVC = senderViewController as? UsersNearbyTableViewController {
+                    
+                    if distance == 1000 {
+                        self.findOtherUsersWithDistanceBetween(upperValue: 3000,
+                                                               lowerValue: 1000,
+                                                               userLocation: userLocation,
+                                                               senderViewController: senderVC)
+                        print("distance updated")
+                    }
+                    var dataArray = [(inst: String, nickname: String)]()
+                    for record in records! {
+                        let nicknameFound = record["Nickname"] as! String
+                        let allInstruments = record["Instrumets"] as! [String]
+                        let mainInstrument = allInstruments.first!
+                        let userData = (inst: mainInstrument, nickname: nicknameFound)
+                        dataArray.append(userData)
+                    }
+                    senderVC.users1 = dataArray
+                    print("between \(distance) and 0 found \(dataArray.count) users")
                 }
-                
-                print("annotations to send farther: \(annotationsToShow.count)")
-                senderViewController.annotationsToShow = annotationsToShow
             }
         })
-        
         return
+    }
+    
+    func findOtherUsersWithDistanceBetween(upperValue: Double, lowerValue: Double, userLocation: CLLocation, senderViewController: UsersNearbyTableViewController) {
+        
+        let userPredicate = NSPredicate(format: "distanceToLocation:fromLocation: (Location,%@) < %f",
+                                        userLocation,
+                                        upperValue)
+        let userQuery = CKQuery(recordType: "publicUserData", predicate: userPredicate)
+        
+        publicDB.perform(userQuery, inZoneWith: nil, completionHandler: { records, error in
+            
+            if error != nil {
+                print("an error occured while performing a user query, error: \(error?.localizedDescription)")
+            } else {
+                guard records?.first != nil else {
+                    print("no records found")
+                    return
+                }
+                
+                
+                var dataArray = [(inst: String, nickname: String)]()
+                for record in records! {
+                    
+                    let location = record["Location"] as! CLLocation
+                    if location.distance(from: userLocation) > lowerValue {
+                    
+                        let nicknameFound = record["Nickname"] as! String
+                        let allInstruments = record["Instrumets"] as! [String]
+                        let mainInstrument = allInstruments.first!
+                    
+                        let userData = (inst: mainInstrument, nickname: nicknameFound)
+                        dataArray.append(userData)
+                    }
+                }
+                print("between \(lowerValue) and \(upperValue) found \(dataArray.count) users")
+                if upperValue == 3000 {
+                    senderViewController.users3n1 = dataArray
+                    self.findOtherUsersWithDistanceBetween(upperValue: 5000,
+                                                           lowerValue: 3000,
+                                                           userLocation: userLocation,
+                                                           senderViewController: senderViewController)
+                } else if upperValue == 5000 {
+                    senderViewController.users5n3 = dataArray
+                    self.findOtherUsersWithDistanceBetween(upperValue: 30000,
+                                                           lowerValue: 5000,
+                                                           userLocation: userLocation,
+                                                           senderViewController: senderViewController)
+                } else {
+                    senderViewController.users5 = dataArray
+                }
+            }
+        })
     }
     
 }

@@ -35,18 +35,14 @@ class SomeUserProfileViewController: ProfileViewController {
             print("can not load name surname")
             return
         }
-        cloud.loadNameSurnameFor(nickname: nickname, senderViewController: self)
-        print("1")
-    }
+        cloud.loadNameSurnameFor(nickname: nickname, senderViewController: self)    }
     
     override func loadAge() {
         guard let nickname = receivedNickname else {
             print("can not load age")
             return
         }
-        cloud.loadAgeFor(nickname: nickname, senderViewController: self)
-        print("1")
-    }
+        cloud.loadAgeFor(nickname: nickname, senderViewController: self)    }
     
     override func loadInstruments() {
         
@@ -55,7 +51,6 @@ class SomeUserProfileViewController: ProfileViewController {
             return
         }
         cloud.loadInstruments(nickname: nickname, senderViewController: self)
-        print("1")
     }
     
     override func loadAddInfo() {
@@ -63,9 +58,7 @@ class SomeUserProfileViewController: ProfileViewController {
             print("can not load info")
             return
         }
-        cloud.loadAddInfoFor(nickname: nickname, senderViewController: self)
-        print("1")
-    }
+        cloud.loadAddInfoFor(nickname: nickname, senderViewController: self)    }
     
     override func loadLinks() {
         guard let nickname = receivedNickname else {
@@ -73,7 +66,6 @@ class SomeUserProfileViewController: ProfileViewController {
             return
         }
         cloud.loadMailFor(nickname: nickname, senderViewController: self)
-        print("1")
     }
 
     
