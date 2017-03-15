@@ -65,8 +65,37 @@ class SomeUserProfileViewController: ProfileViewController {
             print("can not load mail")
             return
         }
-        cloud.loadMailFor(nickname: nickname, senderViewController: self)
+        cloud.loadLinksFor(nickname: nickname, senderViewController: self)
     }
 
+    // UI Events
+    @IBAction func instaIconTapped(_ sender: UITapGestureRecognizer) {
+        
+        print("insta!")
+        
+        if let instaNick = self.instagram {
+            let url = URL(string: "https://www.instagram.com/\(instaNick)/")
+            UIApplication.shared.open(url!, options: [String: Any](), completionHandler: nil)
+        }
+    }
     
+    @IBAction func vkIconTapped(_ sender: Any) {
+        
+        print("vk!")
+        
+        if let vkNick = self.vk {
+            let url = URL(string: "https://vk.com/\(vkNick)")
+            UIApplication.shared.open(url!, options: [String: Any](), completionHandler: nil)
+        }
+    }
+    
+    @IBAction func fbIconTapped(_ sender: Any) {
+        
+        print("fb!")
+        
+        if let fbNick = self.facebook {
+            let url = URL(string: "https://ru-ru.facebook.com/\(fbNick)")
+            UIApplication.shared.open(url!, options: [String: Any](), completionHandler: nil)
+        }
+    }
 }

@@ -23,6 +23,9 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordConfirmation: UITextField!
     
     @IBOutlet weak var mailField: UITextField!
+    @IBOutlet weak var instagramField: UITextField!
+    @IBOutlet weak var vkField: UITextField!
+    @IBOutlet weak var fbField: UITextField!
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -94,6 +97,18 @@ class RegistrationViewController: UIViewController {
             mailField.layer.borderColor = UIColor.red.cgColor
             return
         }
+        guard let insta = instagramField.text else {
+            return
+        }
+        
+        guard let vk = vkField.text else {
+            return
+        }
+        
+        guard let facebook = fbField.text else {
+            return
+        }
+        
         let dateOfBirth = datePicker.date
         
         guard let addInfo = addInfoTextView.text else {
@@ -106,6 +121,9 @@ class RegistrationViewController: UIViewController {
                               nickname: nickname,
                               password: password,
                               mail: mail,
+                              insta: insta,
+                              vk: vk,
+                              facebook: facebook,
                               additionalInformation: addInfo,
                               senderViewController: self)
         

@@ -66,6 +66,12 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
+    var instagram: String?
+    var vk: String?
+    var facebook: String?
+    
+    
     // Flags
     var userIsEditingNow = false
 
@@ -162,7 +168,7 @@ class ProfileViewController: UIViewController {
         guard let nicknameFromDef = defaults.value(forKey: "nickname") as! String? else {
             return
         }
-        cloud.loadMailFor(nickname: nicknameFromDef, senderViewController: self)
+        cloud.loadLinksFor(nickname: nicknameFromDef, senderViewController: self)
     }
     
     func showInsts(instruments: [String]) {

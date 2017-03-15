@@ -77,7 +77,7 @@ class Cloud {
     
     
     // MARK: - Registration:
-    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, additionalInformation: String, senderViewController: UIViewController) {
+    func registerNewUser(name: String, surname: String, dateOfBirth: Date, nickname: String, password: String, mail: String, insta: String, vk: String, facebook: String, additionalInformation: String, senderViewController: UIViewController) {
         
         // saving public data
         let publicDataRecord = CKRecord(recordType: "publicUserData")
@@ -87,6 +87,11 @@ class Cloud {
         publicDataRecord["Nickname"] = nickname as CKRecordValue
         publicDataRecord["Password"] = password as CKRecordValue
         publicDataRecord["Mail"] = mail as CKRecordValue
+        
+        publicDataRecord["Insta"] = insta as CKRecordValue
+        publicDataRecord["VK"] = vk as CKRecordValue
+        publicDataRecord["Facebook"] = facebook as CKRecordValue
+        
         publicDataRecord["Info"] = additionalInformation as CKRecordValue
         
         publicDB.save(publicDataRecord, completionHandler: { record , error in
@@ -294,7 +299,7 @@ class Cloud {
         
     }
     
-    func loadMailFor(nickname: String, senderViewController: ProfileViewController) {
+    func loadLinksFor(nickname: String, senderViewController: ProfileViewController) {
         
         let nicknamePredicate = NSPredicate(format: "Nickname = %@", nickname)
         let nicknameQuery = CKQuery(recordType: "publicUserData", predicate: nicknamePredicate)
@@ -313,6 +318,9 @@ class Cloud {
                 }
                 
                 senderViewController.mail = record["Mail"] as? String
+                senderViewController.instagram = record["Insta"] as? String
+                senderViewController.vk = record["VK"] as? String
+                senderViewController.facebook = record["Facebook"] as? String
                 return
             }
         })
